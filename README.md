@@ -17,12 +17,12 @@ KCKeyboardScrollingImagePicker is available through [CocoaPods](http://cocoapods
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod "KCKeyboardScrollingImagePicker"
+pod 'KCKeyboardScrollingImagePicker'
 ```
 
 ## Author
 
-Kev1nChen, chenyufei@live.com
+Kev1nChen
 
 ## License
 

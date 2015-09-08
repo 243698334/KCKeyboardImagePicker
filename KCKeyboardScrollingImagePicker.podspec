@@ -23,6 +23,6 @@ Pod::Spec.new do |s|
     'KCKeyboardScrollingImagePicker' => ['Pod/Assets/*.png']
   }
 
-  s.public_header_files = 'Pod/Classes/KCKeyboardScrollingImagePickerView.h'
+  s.public_header_files = 'Pod/Classes/*.h'
   s.dependency 'PureLayout', '~> 3.0.1'
 end
