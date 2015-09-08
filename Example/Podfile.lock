@@ -1,0 +1,23 @@
+PODS:
+  - JSQMessagesViewController (7.1.0):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - KCKeyboardScrollingImagePicker (0.1.0)
+  - PureLayout (3.0.1)
+
+DEPENDENCIES:
+  - JSQMessagesViewController
+  - KCKeyboardScrollingImagePicker (from `../`)
+  - PureLayout
+
+EXTERNAL SOURCES:
+  KCKeyboardScrollingImagePicker:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  JSQMessagesViewController: ca11f86fa68ca70835f05e169df9244147c1dc40
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  KCKeyboardScrollingImagePicker: cd45fe74713d5e7d4cb79e4de757da6eb85cf125
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
+
+COCOAPODS: 0.38.2
