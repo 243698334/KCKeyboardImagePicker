@@ -162,7 +162,7 @@
 /**
  @abstract Asks the data source for the number of options buttons to be shown on each
  image when selected.
- @disscussion Different number of option buttons leads to differnt layout styles for
+ @discussion Different number of option buttons leads to differnt layout styles for
  the option buttons. For the one button layout, the only option button will be in the
  center of the image. For the two buttons layout, the options buttons will be in a
  single row centered vertically. For the three buttons layout, there will be two rows
@@ -239,7 +239,7 @@
  @abstract Renders all the components in the keyboard scrolling image picker view, 
  including the image picker controller button, the images collection view, and the
  option buttons view with a blur visual effect view and buttons inside. 
- @disscussion Need to be called after loading more images on the fly.
+ @discussion Need to be called after loading more images on the fly.
  */
 - (void)render;
 
