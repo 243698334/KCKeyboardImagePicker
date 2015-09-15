@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "KCKeyboardScrollingImagePicker"
-  s.version          = "0.0.1"
+  s.version          = "0.1.0"
   s.summary          = "A keyboard-sized scrolling image picker for IM apps."
 
   s.description      = <<-DESC
@@ -10,7 +10,6 @@ Pod::Spec.new do |s|
                        DESC
 
   s.homepage         = "https://github.com/Kev1nChen/KCKeyboardScrollingImagePicker"
-  s.screenshots      = "http://kevinychen.com/wp-content/uploads/2014/04/picker2.jpg", "http://kevinychen.com/wp-content/uploads/2014/04/picker3.jpg"
   s.license          = 'MIT'
   s.author           = 'Kevin Yufei Chen'
   s.source           = { :git => "https://github.com/Kev1nChen/KCKeyboardScrollingImagePicker.git", :tag => 'v0.0.1' }
@@ -24,5 +23,4 @@ Pod::Spec.new do |s|
   }
 
   s.public_header_files = 'Pod/Classes/*.h'
-  s.dependency 'PureLayout', '~> 3.0.1'
 end

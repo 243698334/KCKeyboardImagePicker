@@ -3,7 +3,6 @@ use_frameworks!
 
 target 'KCKeyboardScrollingImagePicker_Example', :exclusive => true do
     pod 'KCKeyboardScrollingImagePicker', :path => '../'
-    pod 'PureLayout'
     pod 'JSQMessagesViewController'
 end
 

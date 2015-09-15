@@ -10,9 +10,10 @@
 
 #import <KCKeyboardScrollingImagePicker/KCKeyboardScrollingImagePickerView.h>
 #import "DemoColorSettingsViewController.h"
+#import "KeyboardScrollingImagePickerOptions.h"
 
 @interface DemoButtonSettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate, DemoColorSettingsViewDelegate>
 
-- (id)initWithButtonIndex:(NSInteger)buttonIndex imagePickerOptions:(KCKeyboardScrollingImagePickerOptions *)imagePickerOptions;
+- (id)initWithButtonIndex:(NSInteger)buttonIndex imagePickerOptions:(KeyboardScrollingImagePickerOptions *)imagePickerOptions;
 
 @end

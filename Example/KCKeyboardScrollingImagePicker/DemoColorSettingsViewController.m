@@ -52,7 +52,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -76,6 +76,9 @@
             tableViewCell.textLabel.text = @"Blue";
             tableViewCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (NSInteger)(blueValue * 255)];
             break;
+        case 3:
+            tableViewCell.textLabel.text = @"Alpha";
+            tableViewCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld", (NSInteger)(alphaValue * 100)];
     }
     return tableViewCell;
 }
@@ -85,7 +88,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     NSString *colorName = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:colorName message:@"Enter an integer from 0 to 255." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];;
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:colorName message:@"Enter an integer from 0 to 255 for RGB or 0 to 100 for Alpha." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];;
     alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
     [alertView textFieldAtIndex:0].placeholder = [NSString stringWithFormat:@"Current value: %@", [tableView cellForRowAtIndexPath:indexPath].detailTextLabel.text];
     [[alertView textFieldAtIndex:0] becomeFirstResponder];
@@ -100,15 +103,15 @@
         return;
     }
     NSInteger currentColorComponentValue = [[alertView textFieldAtIndex:0].text integerValue];
-    if (currentColorComponentValue < 0 || currentColorComponentValue > 255) {
-        [[[UIAlertView alloc] initWithTitle:@"Invalid Input" message:@"The integer should be from 0 to 255." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
+    if (currentColorComponentValue < 0 || currentColorComponentValue > ([alertView.title isEqualToString:@"Alpha"] ? 100 : 255)) {
+        [[[UIAlertView alloc] initWithTitle:@"Invalid Input" message:@"The integer should be from 0 to 255 for RGB or 0 to 100 for Alpha." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
     } else {
         CGFloat redValue, greenValue, blueValue, alphaValue;
         [self.color getRed:&redValue green:&greenValue blue:&blueValue alpha:&alphaValue];
         self.color = [[UIColor alloc] initWithRed:[alertView.title isEqualToString:@"Red"] ? currentColorComponentValue / 255.0 : redValue
                                             green:[alertView.title isEqualToString:@"Green"] ? currentColorComponentValue / 255.0 : greenValue
                                              blue:[alertView.title isEqualToString:@"Blue"] ? currentColorComponentValue / 255.0 : blueValue
-                                            alpha:alphaValue];
+                                            alpha:[alertView.title isEqualToString:@"Alpha"] ? currentColorComponentValue / 100.0 : alphaValue];
         [self.tableView reloadData];
     }
 }

@@ -102,12 +102,12 @@
     self.isKeyboardScrollingImagePickerViewActive = YES;
     
     if (self.keyboardScrollingImagePickerView == nil) {
-        self.keyboardScrollingImagePickerView = [[KCKeyboardScrollingImagePickerView alloc] initWithKeyboardScrollingImagePickerOptions:self.imagePickerOptions];
+        self.keyboardScrollingImagePickerView = [[KCKeyboardScrollingImagePickerView alloc] init];
         self.keyboardScrollingImagePickerView.dataSource = self;
         self.keyboardScrollingImagePickerView.delegate = self;
     }
     
-    CGRect keyboardFrame = self.keyboardController.currentKeyboardFrame;;
+    CGRect keyboardFrame = self.keyboardController.currentKeyboardFrame;
     
     [self.keyboardController.contextView addSubview:self.keyboardScrollingImagePickerView];
     [self.keyboardController.contextView bringSubviewToFront:self.keyboardScrollingImagePickerView];
@@ -165,7 +165,7 @@
                     } else {
                         *stop = YES;
                         dispatch_async(dispatch_get_main_queue(), ^{
-                            [keyboardScrollingImagePickerView reloadData];
+                            [keyboardScrollingImagePickerView render];
                         });
                     }
                 }];
@@ -213,10 +213,51 @@
     return [self.demoPreviewImages objectAtIndex:index];
 }
 
+- (BOOL)isImagePickerControllerButtonVisibleInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView {
+    return YES;
+}
+
+- (UIColor *)backgroundColorForImagePickerControllerButtonInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView {
+    return self.imagePickerOptions.imagePickerControllerButtonColor;
+}
+
+- (UIImage *)backgroundImageForImagePickerControllerButtonInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView {
+    return [UIImage imageNamed:@"ImagePickerControllerButtonIcon"];
+}
+
+- (NSInteger)numberOfOptionButtonsInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView {
+    return [self.imagePickerOptions.optionButtonTitles count];
+}
+
+- (NSString *)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView titleForOptionButtonAtIndex:(NSInteger)index {
+    return [self.imagePickerOptions.optionButtonTitles objectAtIndex:index];
+}
+
+- (UIColor *)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView backgroundColorForOptionButtonAtIndex:(NSInteger)index forState:(UIControlState)state {
+    switch (state) {
+        case UIControlStateNormal:
+            return [self.imagePickerOptions.optionButtonColors objectAtIndex:index];
+        case UIControlStateHighlighted:
+            return [UIColor lightGrayColor];
+        default:
+            return [UIColor lightGrayColor];
+    }
+}
+
+- (UIColor *)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView titleColorForOptionButtonAtIndex:(NSInteger)index forState:(UIControlState)state {
+    switch (state) {
+        case UIControlStateNormal:
+            return [self.imagePickerOptions.optionButtonTitleNormalColors objectAtIndex:index];
+        case UIControlStateHighlighted:
+            return [self.imagePickerOptions.optionButtonTitleHighlightedColors objectAtIndex:index];
+        default:
+            return nil;
+    }
+}
 
 #pragma mark - KCKeyboardScrollingImagePickerViewDelegate
 
-- (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView didTapOptionButton:(UIButton *)button atIndex:(NSInteger)index {
+- (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView didTapOptionButton:(UIButton *)optionButton atIndex:(NSInteger)index {
     JSQPhotoMediaItem *photoMediaItem = [[JSQPhotoMediaItem alloc] initWithImage:[self.demoImages objectAtIndex:index]];
     JSQMessage *newImageMessage = [JSQMessage messageWithSenderId:self.senderId displayName:self.senderDisplayName media:photoMediaItem];
     [self.demoMessages addObject:newImageMessage];

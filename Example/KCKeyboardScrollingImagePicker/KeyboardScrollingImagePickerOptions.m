@@ -1,18 +1,14 @@
 //
-//  KCKeyboardScrollingImagePickerSettings.m
-//  Pods
+//  KeyboardScrollingImagePickerOptions.m
+//  KCKeyboardScrollingImagePicker
 //
-//  Created by Kevin Yufei Chen on 5/21/15.
+//  Created by Kevin Yufei Chen on 9/14/15.
+//  Copyright (c) 2015 Kev1nChen. All rights reserved.
 //
-//
 
-#import "KCKeyboardScrollingImagePickerOptions.h"
+#import "KeyboardScrollingImagePickerOptions.h"
 
-CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonRadius = 60.0;
-CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2.0;
-
-
-@implementation KCKeyboardScrollingImagePickerOptions
+@implementation KeyboardScrollingImagePickerOptions
 
 - (id)init {
     if (self = [super init]) {
@@ -22,7 +18,6 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
         self.imagePickerControllerButtonAlpha = 0.8;
         self.imagePickerControllerButtonSize = 50;
         self.imagePickerControllerButtonColor = [UIColor lightGrayColor];
-        self.imagePickerControllerButtonImage = [UIImage imageNamed:@"ImagePickerControllerButtonIcon"];
         
         self.numberOfOptionButtons = 1;
         self.optionButtonsAlpha = 0.8;

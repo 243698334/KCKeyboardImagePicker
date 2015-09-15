@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic) NSInteger buttonIndex;
-@property (nonatomic, strong) KCKeyboardScrollingImagePickerOptions *imagePickerOptions;
+@property (nonatomic, strong) KeyboardScrollingImagePickerOptions *imagePickerOptions;
 
 @end
 
@@ -33,7 +33,7 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
 
 @implementation DemoButtonSettingsViewController
 
-- (id)initWithButtonIndex:(NSInteger)buttonIndex imagePickerOptions:(KCKeyboardScrollingImagePickerOptions *)imagePickerOptions {
+- (id)initWithButtonIndex:(NSInteger)buttonIndex imagePickerOptions:(KeyboardScrollingImagePickerOptions *)imagePickerOptions {
     if (self = [super init]) {
         self.buttonIndex = buttonIndex;
         self.imagePickerOptions = imagePickerOptions;
@@ -104,7 +104,7 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
         case kButtonColorsSectionIndex:
             tableViewCell = [tableView dequeueReusableCellWithIdentifier:@"ButtonColorsSectionCellIdentifier"];
             if (tableViewCell == nil) {
-                tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ButtonColorsSectionCellIdentifier"];
+                tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"ButtonColorsSectionCellIdentifier"];
                 tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
             CGFloat redValue = 0.0, greenValue = 0.0, blueValue = 0.0, alphaValue = 0.0;
@@ -122,7 +122,7 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
                     tableViewCell.textLabel.text = @"Highlighted Title";
                     break;
             }
-            tableViewCell.detailTextLabel.text = [NSString stringWithFormat:@"R:%ld G:%ld B:%ld", (NSInteger)(redValue * 255), (NSInteger)(greenValue * 255), (NSInteger)(blueValue * 255)];
+            tableViewCell.detailTextLabel.text = [NSString stringWithFormat:@"R:%ld G:%ld B:%ld A:%ld", (NSInteger)(redValue * 255), (NSInteger)(greenValue * 255), (NSInteger)(blueValue * 255), (NSInteger)(alphaValue * 100)];
             break;
         case kButtonTitleSectionIndex:
             tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"ButtonTitleSectionCellIdentifier"];

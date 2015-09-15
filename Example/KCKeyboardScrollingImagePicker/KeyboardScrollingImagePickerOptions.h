@@ -1,17 +1,14 @@
 //
-//  KCKeyboardScrollingImagePickerSettings.h
-//  Pods
+//  KeyboardScrollingImagePickerOptions.h
+//  KCKeyboardScrollingImagePicker
 //
-//  Created by Kevin Yufei Chen on 5/21/15.
-//
+//  Created by Kevin Yufei Chen on 9/14/15.
+//  Copyright (c) 2015 Kev1nChen. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 
-extern CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonRadius;
-extern CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth;
-
-@interface KCKeyboardScrollingImagePickerOptions : NSObject
+@interface KeyboardScrollingImagePickerOptions : NSObject
 
 @property (nonatomic, strong) UIColor *backgroundColor;
 
@@ -19,7 +16,6 @@ extern CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWi
 @property (nonatomic, assign) CGFloat imagePickerControllerButtonAlpha;
 @property (nonatomic, assign) CGFloat imagePickerControllerButtonSize;
 @property (nonatomic, strong) UIColor *imagePickerControllerButtonColor;
-@property (nonatomic, strong) UIImage *imagePickerControllerButtonImage;
 
 @property (nonatomic, assign) NSInteger numberOfOptionButtons;
 @property (nonatomic, assign) CGFloat optionButtonsAlpha;
@@ -29,3 +25,4 @@ extern CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWi
 @property (nonatomic, strong) NSArray *optionButtonTitleHighlightedColors;
 
 @end
+

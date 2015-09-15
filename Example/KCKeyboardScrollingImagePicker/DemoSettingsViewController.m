@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) DemoMessagesViewController *demoMessagesViewController;
-@property (nonatomic, strong) KCKeyboardScrollingImagePickerOptions *imagePickerOptions;
+@property (nonatomic, strong) KeyboardScrollingImagePickerOptions *imagePickerOptions;
 
 @end
 
@@ -43,7 +43,7 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
     
     self.navigationItem.title = @"Demo Settings";
     
-    self.imagePickerOptions = [[KCKeyboardScrollingImagePickerOptions alloc] init];
+    self.imagePickerOptions = [[KeyboardScrollingImagePickerOptions alloc] init];
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
     self.tableView.delegate = self;

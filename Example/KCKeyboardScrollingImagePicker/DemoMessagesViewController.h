@@ -9,8 +9,10 @@
 #import <JSQMessagesViewController/JSQMessages.h>
 #import <KCKeyboardScrollingImagePicker/KCKeyboardScrollingImagePickerView.h>
 
+#import "KeyboardScrollingImagePickerOptions.h"
+
 @interface DemoMessagesViewController : JSQMessagesViewController<KCKeyboardScrollingImagePickerViewDataSource, KCKeyboardScrollingImagePickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
-@property (nonatomic, strong) KCKeyboardScrollingImagePickerOptions *imagePickerOptions;
+@property (nonatomic, strong) KeyboardScrollingImagePickerOptions *imagePickerOptions;
 
 @end

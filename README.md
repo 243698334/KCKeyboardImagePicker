@@ -1,6 +1,5 @@
 # KCKeyboardScrollingImagePicker
 
-[![CI Status](http://img.shields.io/travis/Kev1nChen/KCKeyboardScrollingImagePicker.svg?style=flat)](https://travis-ci.org/Kev1nChen/KCKeyboardScrollingImagePicker)
 [![Version](https://img.shields.io/cocoapods/v/KCKeyboardScrollingImagePicker.svg?style=flat)](http://cocoapods.org/pods/KCKeyboardScrollingImagePicker)
 [![License](https://img.shields.io/cocoapods/l/KCKeyboardScrollingImagePicker.svg?style=flat)](http://cocoapods.org/pods/KCKeyboardScrollingImagePicker)
 [![Platform](https://img.shields.io/cocoapods/p/KCKeyboardScrollingImagePicker.svg?style=flat)](http://cocoapods.org/pods/KCKeyboardScrollingImagePicker)
