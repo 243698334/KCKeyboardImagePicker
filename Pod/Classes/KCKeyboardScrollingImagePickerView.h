@@ -196,7 +196,7 @@
  @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
  requesting this information.
  @param index An index locating the option button.
- @state state A control state for the button.
+ @param state A control state for the button.
  @return A color to be displayed in the option button for a certain control state.
  */
 - (UIColor *)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView backgroundColorForOptionButtonAtIndex:(NSInteger)index forState:(UIControlState)state;
@@ -210,7 +210,7 @@
  @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
  requesting this information.
  @param index An index locating the option button.
- @state state A control state for the button.
+ @param state A control state for the button.
  @return A color to be displayed on the title of a option button for a certain control
  state.
  */
