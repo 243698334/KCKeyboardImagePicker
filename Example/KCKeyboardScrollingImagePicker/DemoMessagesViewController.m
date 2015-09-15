@@ -29,7 +29,7 @@
     [super viewDidLoad];
     
     self.title = @"Messages";
-
+    
     self.senderId = @"SenderID";
     self.senderDisplayName = @"Kevin";
     
@@ -107,24 +107,17 @@
         self.keyboardScrollingImagePickerView.delegate = self;
     }
     
-    CGRect keyboardFrame = self.keyboardController.currentKeyboardFrame;
-    
     [self.keyboardController.contextView addSubview:self.keyboardScrollingImagePickerView];
     [self.keyboardController.contextView bringSubviewToFront:self.keyboardScrollingImagePickerView];
-    [self.keyboardController.contextView endEditing:YES];
     
+    CGRect keyboardFrame = self.keyboardController.currentKeyboardFrame;
+    [self.keyboardController.contextView endEditing:YES];
     if (animated) {
         [UIView animateWithDuration:0.25 animations:^{
             self.keyboardScrollingImagePickerView.frame = keyboardFrame;
-        } completion:^(BOOL finished) {
-            if (finished) {
-                [self.keyboardScrollingImagePickerView layoutIfNeeded];
-                
-            }
         }];
     } else {
         self.keyboardScrollingImagePickerView.frame = keyboardFrame;
-        [self.keyboardScrollingImagePickerView layoutIfNeeded];
     }
 }
 
@@ -132,9 +125,11 @@
     if (self.isKeyboardScrollingImagePickerViewActive == NO) {
         return;
     }
+    CGRect pickerFrame = self.keyboardScrollingImagePickerView.frame;
+    pickerFrame.origin.y = pickerFrame.origin.y + pickerFrame.size.height;
     if (animated) {
         [UIView animateWithDuration:0.25 animations:^{
-            self.keyboardScrollingImagePickerView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0);
+            self.keyboardScrollingImagePickerView.frame = pickerFrame;
         } completion:^(BOOL finished) {
             if (finished) {
                 self.isKeyboardScrollingImagePickerViewActive = NO;
@@ -142,7 +137,7 @@
             }
         }];
     } else {
-        self.keyboardScrollingImagePickerView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0);
+        self.keyboardScrollingImagePickerView.frame = pickerFrame;
         self.isKeyboardScrollingImagePickerViewActive = NO;
         [self.keyboardScrollingImagePickerView removeFromSuperview];
     }
