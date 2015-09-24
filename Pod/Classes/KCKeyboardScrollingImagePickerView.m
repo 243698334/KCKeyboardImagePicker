@@ -39,7 +39,6 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 @property (nonatomic, strong) UIVisualEffectView *blurVisualEffectView;
 @property (nonatomic, strong) NSMutableArray *optionButtons;
 
-@property (nonatomic, assign) BOOL updatedConstraints;
 @property (nonatomic, assign) BOOL isLoadingImages;
 @property (nonatomic, strong) NSIndexPath *currentSelectedIndexPath;
 
@@ -73,17 +72,36 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
         [self.imagePickerControllerButton addTarget:self action:@selector(didTapImagePickerControllerButton:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:self.imagePickerControllerButton];
         
-        self.updatedConstraints = NO;
         self.isLoadingImages = NO;
         self.currentSelectedIndexPath = nil;
     }
     return self;
 }
 
-- (void)render {
+- (void)setFrame:(CGRect)frame {
+    [super setFrame:frame];
+    
     [self renderImagesCollectionView];
     [self renderImagePickerViewControllerButton];
     [self renderOptionButtons];
+}
+
+- (void)updateImage:(UIImage *)image atIndex:(NSInteger)index animated:(BOOL)animated {
+    UICollectionViewCell *cell = [self.imagesCollectionView cellForItemAtIndexPath:[NSIndexPath indexPathForItem:index inSection:0]];
+    UIImage *squareImage = [self squareImageWithImage:image scaledToSize:self.frame.size.height];
+    UIImageView *imageView = [[UIImageView alloc] initWithImage:squareImage];
+    imageView.alpha = 0.0;
+    [cell.contentView addSubview:imageView];
+    if (animated) {
+        [UIView animateWithDuration:0.25 animations:^{
+            imageView.alpha = 1.0;
+        } completion:^(BOOL finished) {
+            cell.backgroundView = nil;
+        }];
+    } else {
+        imageView.alpha = 1.0;
+        cell.backgroundView = nil;
+    }
 }
 
 - (void)renderImagesCollectionView {
@@ -193,6 +211,26 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
     ((UIButton *)self.optionButtons[3]).center = CGPointMake(self.optionButtonsView.frame.size.width * 0.7, self.optionButtonsView.frame.size.height * 0.7);
 }
 
+- (UIImage *)squareImageWithImage:(UIImage *)image scaledToSize:(CGFloat)size {
+    CGPoint origin = CGPointZero;
+    CGFloat scaleRatio = 0;
+    
+    if (image.size.width > image.size.height) {
+        scaleRatio = size / image.size.height;
+        origin = CGPointMake(-(image.size.width - image.size.height) / 2, 0);
+    } else {
+        scaleRatio = size / image.size.width;
+        origin = CGPointMake(0, -(image.size.height - image.size.width) / 2);
+    }
+    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scaleRatio, scaleRatio);
+    UIGraphicsBeginImageContextWithOptions(CGSizeMake(size, size), YES, 0);
+    CGContextConcatCTM(UIGraphicsGetCurrentContext(), scaleTransform);
+    [image drawAtPoint:origin];
+    image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return image;
+}
+
 - (void)didTapImagePickerControllerButton:(id)sender {
     if (self.delegate && [self.delegate respondsToSelector:@selector(didTapImagePickerControllerButtonInKeyboardScrollingImagePickerView:)]) {
         [self.delegate didTapImagePickerControllerButtonInKeyboardScrollingImagePickerView:self];
@@ -259,11 +297,6 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfImagesInKeyboardScrollingImagePickerView:)]) {
-        if ([self.dataSource numberOfImagesInKeyboardScrollingImagePickerView:self] == 0) {
-            if (self.delegate && [self.delegate respondsToSelector:@selector(needLoadMoreImagesForKeyboardScrollingImagePickerView:)]) {
-                [self.delegate needLoadMoreImagesForKeyboardScrollingImagePickerView:self];
-            }
-        }
         return [self.dataSource numberOfImagesInKeyboardScrollingImagePickerView:self];
     } else {
         return 0;
@@ -272,8 +305,7 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KeyboardScrollingImagePickerViewCell" forIndexPath:indexPath];
-    UIImageView *imageView = [[UIImageView alloc] initWithImage:[self.dataSource keyboardScrollingImagePickerView:self imageAtIndex:indexPath.row]];
-    cell.backgroundView = imageView;
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[self.dataSource keyboardScrollingImagePickerView:self imageAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -281,19 +313,23 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 #pragma mark - UICollectionViewFlowLayout
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UIImage *currentImage = [self.dataSource keyboardScrollingImagePickerView:self imageAtIndex:indexPath.row];
-    
-    CGFloat imageHeight = currentImage.size.height;
-    CGFloat viewHeight = collectionView.frame.size.height;
-    CGFloat scaleFactor = viewHeight / imageHeight;
-    
-    CGSize scaledSize = CGSizeApplyAffineTransform(currentImage.size, CGAffineTransformMakeScale(scaleFactor, scaleFactor));
-    scaledSize.height = viewHeight < scaledSize.height ? viewHeight : scaledSize.height;
-    return scaledSize;
+    return CGSizeMake(collectionView.frame.size.height, collectionView.frame.size.height);
 }
 
 
 #pragma mark - UICollectionViewDelegate
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardScrollingImagePickerView:willDisplayImageAtIndex:)]) {
+        [self.delegate keyboardScrollingImagePickerView:self willDisplayImageAtIndex:indexPath.item];
+    }
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didEndDisplayingCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    for (UIView *currentSubview in cell.contentView.subviews) {
+        [currentSubview removeFromSuperview];
+    }
+}
 
 - (void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath {
     [self hideOptionButtonsViewInCollectionViewCell:[collectionView cellForItemAtIndexPath:indexPath] animated:YES];
@@ -315,26 +351,6 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
     
     if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardScrollingImagePickerView:didSelectItemAtIndex:)]) {
         [self.delegate keyboardScrollingImagePickerView:self didSelectItemAtIndex:indexPath.row];
-    }
-}
-
-
-#pragma mark - UIScrollViewDelegate
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    if (self.currentSelectedIndexPath != nil) {
-        [self hideOptionButtonsViewInCollectionViewCell:[self.imagesCollectionView cellForItemAtIndexPath:self.currentSelectedIndexPath] animated:YES];
-        self.currentSelectedIndexPath = nil;
-    }
-    
-    if (scrollView.contentOffset.x + scrollView.frame.size.width >= scrollView.contentSize.width) {
-        // reach the right end of the scrollView
-        if (!self.isLoadingImages) {
-            self.isLoadingImages = YES;
-            if (self.delegate && [self.delegate respondsToSelector:@selector(needLoadMoreImagesForKeyboardScrollingImagePickerView:)]) {
-                [self.delegate needLoadMoreImagesForKeyboardScrollingImagePickerView:self];
-            }
-        }
     }
 }
 

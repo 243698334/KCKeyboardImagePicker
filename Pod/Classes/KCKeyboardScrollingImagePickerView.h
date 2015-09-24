@@ -71,6 +71,21 @@
  */
 - (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView didDeselectItemAtIndex:(NSInteger)index;
 
+
+@optional
+/**
+ @abstract Tells the delegate that the picker view will show an image at an index.
+ @discussion This method should be implemented if the controller who owns the image
+ picker view is optimized for asynchronous image loading. The `updateImage:AtIndex:`
+ method is expected to be called after the image is ready. Until then, there will be
+ a placeholder image displayed at that cell.
+ @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ informing the delegate of such information.
+ @param index The index of the image will be shown.
+ */
+- (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView willDisplayImageAtIndex:(NSInteger)index;
+
+
 @optional
 /**
  @abstract Tells the delegate that the image picker controller button was tapped.
@@ -80,16 +95,6 @@
  informing the delegate about the tap event.
  */
 - (void)didTapImagePickerControllerButtonInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView;
-
-@optional
-/**
- @abstract Tells the delegate that more images are needed.
- @discussion This method will be called when the user reaches to the end of the 
- collection view. There could be smarter ways to determine when to call this method.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
- informing the delegate about the need for more images.
- */
-- (void)needLoadMoreImagesForKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView;
 
 @end
 
@@ -118,10 +123,13 @@
 /**
  @abstract Asks the data source for an image to display in a particular location in
  the keyboard scrolling image picker view.
- @discussion The returned image can be a resized one instead of a full-size image to
- save memory.
+ @discussion Since this method is called along with the data source methods for the 
+ image collection view, it is suggested to return a placeholder or an immediately 
+ available thumbnail instead of the actual full-sized image in order to avoid UI lag.
+ You can asynchronously load images with better resolution and use the 
+ `updateImage:atIndex:animated:` method to replace the placeholder or the thumbnail.
  @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
- requesting this information.
+ requesting an image which should be immediately available.
  @param index An index locating the image.
  @return A image object to be displayed in the keyboard scrolling image picker view.
  */
@@ -236,11 +244,13 @@
 @property (nonatomic, assign) id<KCKeyboardScrollingImagePickerViewDataSource> dataSource;
 
 /**
- @abstract Renders all the components in the keyboard scrolling image picker view, 
- including the image picker controller button, the images collection view, and the
- option buttons view with a blur visual effect view and buttons inside. 
- @discussion Need to be called after loading more images on the fly.
+ @abstract Updates the image at an index of the collection view with or without animation.
+ @discussion This method is expected to be called when the controller who owns the image
+ picker view is optimized for asynchronous image loading. 
+ @param image An image to be set.
+ @param index An index locating the collection view cell.
+ @param animated A flag indicating if this update should be animated.
  */
-- (void)render;
+- (void)updateImage:(UIImage *)image atIndex:(NSInteger)index animated:(BOOL)animated;
 
 @end

@@ -8,8 +8,9 @@
 
 #import "DemoMessagesViewController.h"
 
-#import <AssetsLibrary/AssetsLibrary.h>
+#import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+
 
 @interface DemoMessagesViewController () <JSQMessagesKeyboardControllerDelegate>
 
@@ -18,8 +19,9 @@
 @property (strong, nonatomic) NSLayoutConstraint *toolbarBottomLayoutGuide;
 
 @property (strong, nonatomic) NSMutableArray *demoMessages;
-@property (strong, nonatomic) NSMutableArray *demoImages;
-@property (strong, nonatomic) NSMutableArray *demoPreviewImages;
+
+@property (strong, nonatomic) PHFetchResult *photoLibraryFetchResult;
+@property (strong, nonatomic) UIImage *placeHolderImage;
 
 @end
 
@@ -33,11 +35,9 @@
     self.senderId = @"SenderID";
     self.senderDisplayName = @"Kevin";
     
-    self.demoImages = [[NSMutableArray alloc] init];
-    self.demoPreviewImages = [[NSMutableArray alloc] init];
     self.demoMessages = [[NSMutableArray alloc] initWithObjects:
-                         [[JSQMessage alloc] initWithSenderId:@"KC" senderDisplayName:@"Kev1nChen" date:[NSDate date] text:@"Welcome!"],
-                         [[JSQMessage alloc] initWithSenderId:@"KC" senderDisplayName:@"Kev1nChen" date:[NSDate date] text:@"Tap on accessory icon to toggle the picker."],
+                         [[JSQMessage alloc] initWithSenderId:@"KC" senderDisplayName:@"Kev1nChen" date:[NSDate date] text:@"Tap on the accessory icon to toggle the picker."],
+                         [[JSQMessage alloc] initWithSenderId:@"KC" senderDisplayName:@"Kev1nChen" date:[NSDate date] text:@"This is a demo of the integration with JSQMessagesVC. It should easily work with your own IM interface as well."],
                          nil];
     
     self.isKeyboardScrollingImagePickerViewActive = NO;
@@ -62,6 +62,7 @@
 - (void)textViewTextDidBeginEditing {
     [self hideKeyboardScrollingImagePickerView:YES];
 }
+
 
 #pragma mark - JSQMessagesKeyboardControllerDelegate
 
@@ -91,7 +92,6 @@
 
 - (void)showKeyboardScrollingImagePickerView:(BOOL)animated {
     if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == 0.0f) {
-        NSLog(@"keyboard hidden");
         [self.inputToolbar.contentView.textView becomeFirstResponder];
     }
     
@@ -101,15 +101,26 @@
     
     self.isKeyboardScrollingImagePickerViewActive = YES;
     
+    // In this demo, we will be using the Photos Framework to load images from camera roll.
+    if (self.photoLibraryFetchResult == nil) {
+        PHFetchOptions *fetchOptions = [[PHFetchOptions alloc] init];
+        fetchOptions.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:NO]];
+        self.photoLibraryFetchResult = [PHAsset fetchAssetsWithOptions:fetchOptions];
+        self.placeHolderImage = [UIImage imageNamed:@"PlaceHolderImage"];
+    }
+    
+    // Initialize the picker view and assign its dataSource and delegate.
     if (self.keyboardScrollingImagePickerView == nil) {
         self.keyboardScrollingImagePickerView = [[KCKeyboardScrollingImagePickerView alloc] init];
         self.keyboardScrollingImagePickerView.dataSource = self;
         self.keyboardScrollingImagePickerView.delegate = self;
     }
     
+    // To integrate with JSQMessagesViewController, add the picker to the keyboardController's contextView.
     [self.keyboardController.contextView addSubview:self.keyboardScrollingImagePickerView];
     [self.keyboardController.contextView bringSubviewToFront:self.keyboardScrollingImagePickerView];
     
+    // Set the image picker's frame to be the same as the keyboard's.
     CGRect keyboardFrame = self.keyboardController.currentKeyboardFrame;
     [self.keyboardController.contextView endEditing:YES];
     if (animated) {
@@ -143,69 +154,17 @@
     }
 }
 
-// TODO optimize this logic
-- (void)loadImagesFromCameraRollWithAmount:(NSInteger)amount inKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        [[[ALAssetsLibrary alloc] init] enumerateGroupsWithTypes:ALAssetsGroupSavedPhotos usingBlock:^(ALAssetsGroup *group, BOOL *stop) {
-            if (group != nil) {
-                [group setAssetsFilter:[ALAssetsFilter allPhotos]];
-                NSUInteger lastIndex = group.numberOfAssets - [self.demoImages count];
-                [group enumerateAssetsWithOptions:NSEnumerationReverse usingBlock:^(ALAsset *result, NSUInteger index, BOOL *stop) {
-                    if (result != nil) {
-                        if (index >= lastIndex - amount && index < lastIndex) {
-                            UIImage *image = [UIImage imageWithCGImage:[[result defaultRepresentation] fullScreenImage]];
-                            [self.demoImages addObject:image];
-                            [self.demoPreviewImages addObject:[self squareImageWithImage:image scaledToSize:300]];
-                        }
-                    } else {
-                        *stop = YES;
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            [keyboardScrollingImagePickerView render];
-                        });
-                    }
-                }];
-            }
-        } failureBlock:^(NSError *error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[[UIAlertView alloc] initWithTitle:@"Failed to load images" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
-            });
-        }];
-    });
-}
-
-- (UIImage *)squareImageWithImage:(UIImage *)image scaledToSize:(CGFloat)size {
-    CGPoint origin = CGPointZero;
-    CGFloat scaleRatio = 0;
-    
-    if (image.size.width > image.size.height) {
-        scaleRatio = size / image.size.height;
-        origin = CGPointMake(-(image.size.width - image.size.height) / 2, 0);
-    } else {
-        scaleRatio = size / image.size.width;
-        origin = CGPointMake(0, -(image.size.height - image.size.width) / 2);
-    }
-    CGAffineTransform scaleTransform = CGAffineTransformMakeScale(scaleRatio, scaleRatio);
-    
-    UIGraphicsBeginImageContextWithOptions(CGSizeMake(size, size), YES, 0);
-    
-    CGContextConcatCTM(UIGraphicsGetCurrentContext(), scaleTransform);
-    [image drawAtPoint:origin];
-    image = UIGraphicsGetImageFromCurrentImageContext();
-    
-    UIGraphicsEndImageContext();
-    return image;
-}
-
-
 
 #pragma mark - KCKeyboardScrollingImagePickerViewDataSource
 
 - (NSInteger)numberOfImagesInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView {
-    return [self.demoPreviewImages count];
+    return [self.photoLibraryFetchResult count];
 }
 
 - (UIImage *)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView imageAtIndex:(NSInteger)index {
-    return [self.demoPreviewImages objectAtIndex:index];
+    // Instead of the actual image, it is recommended to return a placeholder image here.
+    // Read the documentation for this data source method for more details.
+    return self.placeHolderImage;
 }
 
 - (BOOL)isImagePickerControllerButtonVisibleInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView {
@@ -252,15 +211,32 @@
 
 #pragma mark - KCKeyboardScrollingImagePickerViewDelegate
 
+- (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView willDisplayImageAtIndex:(NSInteger)index {
+    CGSize targetSize = CGSizeMake(self.keyboardScrollingImagePickerView.frame.size.height * [UIScreen mainScreen].scale, self.keyboardScrollingImagePickerView.frame.size.height * [UIScreen mainScreen].scale);
+    PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
+    imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeFast;
+    PHAsset *currentAsset = [self.photoLibraryFetchResult objectAtIndex:index];
+    [[PHImageManager defaultManager] requestImageForAsset:currentAsset targetSize:targetSize contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        if ([[info objectForKey:PHImageResultIsDegradedKey] isEqual:[NSNumber numberWithInt:0]]) {
+            [keyboardScrollingImagePickerView updateImage:result atIndex:index animated:YES];
+        }
+    }];
+}
+
 - (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView didTapOptionButton:(UIButton *)optionButton atIndex:(NSInteger)index {
-    JSQPhotoMediaItem *photoMediaItem = [[JSQPhotoMediaItem alloc] initWithImage:[self.demoImages objectAtIndex:index]];
-    JSQMessage *newImageMessage = [JSQMessage messageWithSenderId:self.senderId displayName:self.senderDisplayName media:photoMediaItem];
-    [self.demoMessages addObject:newImageMessage];
-    [self finishSendingMessageAnimated:YES];
+    PHAsset *currentAsset = [self.photoLibraryFetchResult objectAtIndex:index];
+    [[PHImageManager defaultManager] requestImageForAsset:currentAsset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:nil resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        if ([[info objectForKey:PHImageResultIsDegradedKey] isEqual:[NSNumber numberWithInt:0]]) {
+            JSQPhotoMediaItem *photoMediaItem = [[JSQPhotoMediaItem alloc] initWithImage:result];
+            JSQMessage *newImageMessage = [JSQMessage messageWithSenderId:self.senderId displayName:self.senderDisplayName media:photoMediaItem];
+            [self.demoMessages addObject:newImageMessage];
+            [self finishSendingMessageAnimated:YES];
+        }
+    }];
 }
 
 - (void)needLoadMoreImagesForKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView {
-    [self loadImagesFromCameraRollWithAmount:10 inKeyboardScrollingImagePickerView:keyboardScrollingImagePickerView];
+    // optional
 }
 
 - (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView didSelectItemAtIndex:(NSInteger)index {
@@ -274,10 +250,6 @@
 - (void)didTapImagePickerControllerButtonInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView {
     [self hideKeyboardScrollingImagePickerView:YES];
     
-    if (([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary] == NO
-         && [UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeSavedPhotosAlbum] == NO)) {
-        [[[UIAlertView alloc] initWithTitle:@"Permission Denied" message:@"Please allow TicText to access your Camera Roll." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
-    }
     UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]
         && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypePhotoLibrary] containsObject:(NSString *)kUTTypeImage]) {
@@ -287,9 +259,8 @@
                && [[UIImagePickerController availableMediaTypesForSourceType:UIImagePickerControllerSourceTypeSavedPhotosAlbum] containsObject:(NSString *)kUTTypeImage]) {
         imagePickerController.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
         imagePickerController.mediaTypes = [NSArray arrayWithObject:(NSString *)kUTTypeImage];
-    } else {
-        [[[UIAlertView alloc] initWithTitle:@"Permission Denied" message:@"Please allow TicText to access your Camera Roll." delegate:nil cancelButtonTitle:@"Dismiss" otherButtonTitles:nil] show];
     }
+    
     imagePickerController.allowsEditing = YES;
     imagePickerController.delegate = self;
     [self presentViewController:imagePickerController animated:YES completion:nil];
@@ -306,6 +277,14 @@
     [self.demoMessages addObject:newImageMessage];
     [self finishSendingMessageAnimated:YES];
 }
+
+
+// ================================================================================= \\
+// All methods below this point are copied from the JSQMessagesViewController Demo.  \\
+// As mentioned in the README, this is just a demo of KCKeyboardScrollingImagePicker \\
+// integrating with JSQMessagesViewController. However, using this library in your   \\
+// own implementation is not hard at all.                                            \\
+// ================================================================================= \\
 
 #pragma mark - JSQMessagesViewController method overrides
 
