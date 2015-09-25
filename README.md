@@ -10,6 +10,10 @@
 ![Screenshot2](https://raw.githubusercontent.com/Kev1nChen/KCKeyboardScrollingImagePicker/master/Screenshots/screenshot2.jpg)
 ![Screenshot3](https://raw.githubusercontent.com/Kev1nChen/KCKeyboardScrollingImagePicker/master/Screenshots/screenshot3.jpg)
 
+## Documentation
+
+Click [here](http://cocoadocs.org/docsets/KCKeyboardScrollingImagePicker) for full documentation. 
+
 ## Demo
 
 To run the example project, clone the repo, and run `pod install` from the `Example` directory first.
