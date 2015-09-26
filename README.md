@@ -22,6 +22,10 @@ To run the example project, clone the repo, and run `pod install` from the `Exam
 
 #### General Use
 
+````objective-c
+#import <KCKeyboardImagePicker/KCKeyboardImagePickerController.h>
+````
+
 - Display
 
 Set a frame (usually the frame of the keyboard) to the `KCKeyboardImagePickerController`, and add the `imagePickerView` to a container. 
@@ -113,7 +117,13 @@ To dismiss the picker,
 [self.keyboardImagePickerController hideKeyboardImagePickerViewAnimated:animated];
 ````
 
-Alternatively, you can have your own implementation to adopt `KCKeyboardImagePickerViewDataSource` and `KCKeyboardImagePickerViewDelegate`. So you can customize the source of the images and other styles of the picker. 
+#### Without the default controller
+
+Alternatively, you can have your own implementation to adopt `KCKeyboardImagePickerViewDataSource` and `KCKeyboardImagePickerViewDelegate`. Just do
+````objective-c
+#import <KCKeyboardImagePicker/KCKeyboardImagePickerView.h>
+````
+So you can customize the source of the images and other styles of the picker. 
 
 ## Installation
 
