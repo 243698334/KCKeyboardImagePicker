@@ -20,20 +20,65 @@ To run the example project, clone the repo, and run `pod install` from the `Exam
 
 ## Usage
 
-This demo shows you how to integrate KCKeyboardImagePicker with the famous [JSQMessagesViewController](https://github.com/jessesquires/JSQMessagesViewController). 
+#### General Use
 
-First, you need to subclass `JSQMessagesViewController` and adopt `KCKeyboardImagePickerViewDataSource` and `KCKeyboardImagePickerViewDelegate` protocols. 
+- Display
+
+Set a frame (usually the frame of the keyboard) to the `KCKeyboardImagePickerController`, and add the `imagePickerView` to a container. 
 ````objective-c
-@interface DemoMessagesViewController : JSQMessagesViewController<KCKeyboardImagePickerViewDataSource, KCKeyboardImagePickerViewDelegate>
+self.keyboardImagePickerController = [[KCKeyboardImagePickerController alloc] init];
+self.keyboardImagePickerController.keyboardFrame = self.keyboardController.currentKeyboardFrame;
+[self.keyboardController.contextView addSubview:self.keyboardImagePickerController.imagePickerView];
 ````
 
-Then, in the `.m` file, the trick is to initialize your own `JSQKeyboardController` instead of using the one from the super class. 
+- Actions
 
-Adopt the `JSQMessagesKeyboardControllerDelegate` protocol in the `@interface` line.
+To add an action for an option button, 
+````objective-c
+self.action = [KCKeyboardImagePickerAction actionWithOptionButtonTag:1 
+                                                               title:@"Send" 
+                                                             handler:^(UIImage *selectedImage) {
+    // do something with the `selectedImage`
+}];
+[self.keyboardImagePickerController addAction:self.action];
+````
+To add an action for the image picker controller button (the one on the bottom left corner to trigger the `UIImagePickerController`)
+````objective-c
+self.action = [KCKeyboardImagePickerAction actionactionWithImagePickerControllerButtonParentViewController:self
+                                                                                                   handler:^(UIImage *selectedImage) {
+    // do something with the `selectedImage`
+}];
+[self.keyboardImagePickerController addAction:self.action];
+````
+
+- Styles
+
+To add a style for an option button, 
+````objective-c
+self.style = [KCKeyboardImagePickerStyle styleWithOptionButtonTag:1
+                                                       titleColor:[UIColor whiteColor]
+                                                  backgroundColor:[UIColor lightGrayColor]];
+[self.keyboardImagePickerController addStyle:self.style];
+````
+To add a style for the image picker controller button, 
+````objective-c
+self.style = [KCKeyboardImagePickerStyle styleWithImagePickerControllerBackgroundColor:[UIColor lightGrayColor] 
+                                                                                 image:[UIImage imageNamed:@"someImage"]];
+[self.keyboardImagePickerController addStyle:self.style];
+````
+
+You can add up to four actions (namely four option buttons). Each style associated will be matched by the `tag` number. 
+
+For different number of option buttons, the layout will be different. 
+
+#### Integrate with `JSQMessengeViewController`
+The demo included shows you how to integrate KCKeyboardImagePicker with the famous [JSQMessagesViewController](https://github.com/jessesquires/JSQMessagesViewController). 
+
+In your own subclass of the `JSQMessagesViewController` class, adopt the `JSQMessagesKeyboardControllerDelegate` protocol and override the `JSQKeyboardController` object.
+
 ````objective-c
 @interface DemoMessagesViewController () <JSQMessagesKeyboardControllerDelegate>
 ````
-In `- (void)viewDidLoad`, initialize your own `keyboardController` and set delegate to `self`.
 ````objective-c
 self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextView:self.inputToolbar.contentView.textView 
                                                                       contextView:self.view
@@ -50,47 +95,22 @@ if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBo
   // check the demo for details
 }
 ````
-To bring up the picker, first initialize the picker and assign its `dataSource` and `delegate` to be `self`. Then add it to the `contextView` of the `keyboardController`.
+Initializing the picker by using the `KCKeyboardImagePickerController`. You need to set the frame of the picker by assigning the current keyboard frame to `keyboardFrame` attribute. Don't forget to add the picker view to the `contextView` of the `keyboardController`. 
 ````objective-c
-if (self.keyboardImagePickerView == nil) {
-  self.keyboardImagePickerView = [[KCKeyboardImagePickerView alloc] init];
-  self.keyboardImagePickerView.dataSource = self;
-  self.keyboardImagePickerView.delegate = self;
-}
-[self.keyboardController.contextView addSubview:self.keyboardImagePickerView];
-[self.keyboardController.contextView bringSubviewToFront:self.keyboardImagePickerView];
+self.keyboardImagePickerController = [[KCKeyboardImagePickerController alloc] init];
+self.keyboardImagePickerController.keyboardFrame = self.keyboardController.currentKeyboardFrame;
+[self.keyboardController.contextView addSubview:self.keyboardImagePickerController.imagePickerView];
 ````
-Before showing the picker, simply end the editing mode of the `contextView` to hide the keyboard. But before that, you should save the current keyboard frame and assign it back to the picker. 
+
+Before showing the picker, you can end the editing mode of the `contextView` to hide the keyboard. 
 ````objective-c
-CGRect keyboardFrame = self.keyboardController.currentKeyboardFrame;
 [self.keyboardController.contextView endEditing:YES];
-[UIView animateWithDuration:0.25 animations:^{
-  self.keyboardImagePickerView.frame = keyboardFrame;
-}];
-````
-To dismiss the picker, just change its frame and move it under the screen. There are a lot of ways to do this.
-````objective-c
-[UIView animateWithDuration:0.25 animations:^{
-  CGRect pickerFrame = self.keyboardImagePickerView.frame;
-  pickerFrame.origin.y = pickerFrame.origin.y + pickerFrame.size.height;
-  self.keyboardImagePickerView.frame = pickerFrame;
-} completion:^(BOOL finished) {
-  if (finished) {
-    [self.keyboardImagePickerView removeFromSuperview];
-  }
-}]; 
+[self.keyboardImagePickerController showKeyboardImagePickerViewAnimated:animated];
 ````
 
-If you are not using `JSQMessengesViewController`, you can get the size of the keyboard by listening to `UIKeyboardDidShowNotification`.
+To dismiss the picker, 
 ````objective-c
-[[NSNotificationCenter defaultCenter] addObserver:self
-                                         selector:@selector(keyboardDidShow:)
-                                             name:UIKeyboardDidShowNotification
-                                           object:nil];
-
-- (void)keyboardDidShow:(NSNotification *)notification {
-  CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-}
+[self.keyboardImagePickerController hideKeyboardImagePickerViewAnimated:animated];
 ````
 
 Finally, don't forget to implement the methods in `KCKeyboardImagePickerViewDataSource` and `KCKeyboardImagePickerViewDelegate`. So you can customize the color, title, and the number of the option buttons. 
