@@ -75,7 +75,7 @@ You can add up to four actions (namely four option buttons). Each style associat
 
 For different number of option buttons, the layout will be different. 
 
-#### Integrate with `JSQMessengeViewController`
+#### Integrate with `JSQMessagesViewController`
 The demo included shows you how to integrate KCKeyboardImagePicker with the famous [JSQMessagesViewController](https://github.com/jessesquires/JSQMessagesViewController). 
 
 In your own subclass of the `JSQMessagesViewController` class, adopt the `JSQMessagesKeyboardControllerDelegate` protocol and override the `JSQKeyboardController` object.
