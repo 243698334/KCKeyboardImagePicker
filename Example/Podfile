@@ -1,11 +1,11 @@
 source 'https://github.com/CocoaPods/Specs.git'
 use_frameworks!
 
-target 'KCKeyboardScrollingImagePicker_Example', :exclusive => true do
-    pod 'KCKeyboardScrollingImagePicker', :path => '../'
+target 'KCKeyboardImagePicker_Example', :exclusive => true do
+    pod 'KCKeyboardImagePicker', :path => '../'
     pod 'JSQMessagesViewController'
 end
 
-target 'KCKeyboardScrollingImagePicker_Tests', :exclusive => true do
-    pod 'KCKeyboardScrollingImagePicker', :path => '../'
+target 'KCKeyboardImagePicker_Tests', :exclusive => true do
+    pod 'KCKeyboardImagePicker', :path => '../'
 end

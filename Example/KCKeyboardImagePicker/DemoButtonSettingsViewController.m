@@ -1,6 +1,6 @@
 //
 //  DemoButtonSettingsViewController.m
-//  KCKeyboardScrollingImagePicker
+//  KCKeyboardImagePicker
 //
 //  Created by Kevin Yufei Chen on 9/6/15.
 //  Copyright (c) 2015 Kev1nChen. All rights reserved.
@@ -13,7 +13,7 @@
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic) NSInteger buttonIndex;
-@property (nonatomic, strong) KeyboardScrollingImagePickerOptions *imagePickerOptions;
+@property (nonatomic, strong) KeyboardImagePickerOptions *imagePickerOptions;
 
 @end
 
@@ -33,7 +33,7 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
 
 @implementation DemoButtonSettingsViewController
 
-- (id)initWithButtonIndex:(NSInteger)buttonIndex imagePickerOptions:(KeyboardScrollingImagePickerOptions *)imagePickerOptions {
+- (id)initWithButtonIndex:(NSInteger)buttonIndex imagePickerOptions:(KeyboardImagePickerOptions *)imagePickerOptions {
     if (self = [super init]) {
         self.buttonIndex = buttonIndex;
         self.imagePickerOptions = imagePickerOptions;

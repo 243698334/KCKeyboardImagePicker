@@ -1,6 +1,6 @@
 //
-//  KCKeyboardScrollingImagePickerView.m
-//  https://github.com/Kev1nChen/KCKeyboardScrollingImagePicker
+//  KCKeyboardImagePickerView.m
+//  https://github.com/Kev1nChen/KCKeyboardImagePicker
 //
 //  Copyright (c) 2015 Kevin Yufei Chen
 //  Special thanks to Chengkan Huang
@@ -26,12 +26,12 @@
 //  SOFTWARE.
 //
 
-#import "KCKeyboardScrollingImagePickerView.h"
+#import "KCKeyboardImagePickerView.h"
 
-CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonRadius = 60.0;
-CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2.0;
+CGFloat const kKCKeyboardImagePickerViewCellOptionButtonRadius = 60.0;
+CGFloat const kKCKeyboardImagePickerViewCellOptionButtonBorderWidth = 2.0;
 
-@interface KCKeyboardScrollingImagePickerView () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface KCKeyboardImagePickerView () <UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *imagesCollectionView;
 @property (nonatomic, strong) UIButton *imagePickerControllerButton;
@@ -44,7 +44,7 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 
 @end
 
-@implementation KCKeyboardScrollingImagePickerView
+@implementation KCKeyboardImagePickerView
 
 - (id)init {
     CGRect initialFrame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height, [UIScreen mainScreen].bounds.size.width, 0);
@@ -63,7 +63,7 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
         self.imagesCollectionView.allowsSelection = YES;
         self.imagesCollectionView.showsHorizontalScrollIndicator = NO;
         self.imagesCollectionView.backgroundColor = [UIColor whiteColor];
-        [self.imagesCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"KeyboardScrollingImagePickerViewCell"];
+        [self.imagesCollectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"KeyboardImagePickerViewCell"];
         [self addSubview:self.imagesCollectionView];
         
         self.imagePickerControllerButton = [[UIButton alloc] init];
@@ -110,24 +110,24 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 }
 
 - (void)renderImagePickerViewControllerButton {
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(isImagePickerControllerButtonVisibleInKeyboardScrollingImagePickerView:)]) {
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(isImagePickerControllerButtonVisibleInKeyboardImagePickerView:)]) {
         [self.imagePickerControllerButton removeFromSuperview];
-        if ([self.dataSource isImagePickerControllerButtonVisibleInKeyboardScrollingImagePickerView:self]) {
+        if ([self.dataSource isImagePickerControllerButtonVisibleInKeyboardImagePickerView:self]) {
             [self addSubview:self.imagePickerControllerButton];
         }
     }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(backgroundColorForImagePickerControllerButtonInKeyboardScrollingImagePickerView:)]) {
-        self.imagePickerControllerButton.backgroundColor = [self.dataSource backgroundColorForImagePickerControllerButtonInKeyboardScrollingImagePickerView:self];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(backgroundColorForImagePickerControllerButtonInKeyboardImagePickerView:)]) {
+        self.imagePickerControllerButton.backgroundColor = [self.dataSource backgroundColorForImagePickerControllerButtonInKeyboardImagePickerView:self];
     }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(backgroundImageForImagePickerControllerButtonInKeyboardScrollingImagePickerView:)]) {
-        [self.imagePickerControllerButton setImage:[self. dataSource backgroundImageForImagePickerControllerButtonInKeyboardScrollingImagePickerView:self] forState:UIControlStateNormal];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(backgroundImageForImagePickerControllerButtonInKeyboardImagePickerView:)]) {
+        [self.imagePickerControllerButton setImage:[self. dataSource backgroundImageForImagePickerControllerButtonInKeyboardImagePickerView:self] forState:UIControlStateNormal];
     }
     self.imagePickerControllerButton.frame = CGRectMake(5, self.bounds.size.height - 50 - 5, 50, 50);
 }
 
 - (void)renderOptionButtons {
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfOptionButtonsInKeyboardScrollingImagePickerView:)]) {
-        if ([self.dataSource numberOfOptionButtonsInKeyboardScrollingImagePickerView:self] > 0) {
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfOptionButtonsInKeyboardImagePickerView:)]) {
+        if ([self.dataSource numberOfOptionButtonsInKeyboardImagePickerView:self] > 0) {
             self.optionButtonsView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.imagesCollectionView.bounds.size.height, self.imagesCollectionView.bounds.size.height)];
             self.optionButtonsView.alpha = 0.0;
             self.optionButtonsView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -136,12 +136,12 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
             [self.optionButtonsView addSubview:self.blurVisualEffectView];
             
             self.optionButtons = [[NSMutableArray alloc] init];
-            for (NSUInteger i = 0; i < [self.dataSource numberOfOptionButtonsInKeyboardScrollingImagePickerView:self]; i++) {
-                UIButton *currentOptionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kKCKeyboardScrollingImagePickerViewCellOptionButtonRadius, kKCKeyboardScrollingImagePickerViewCellOptionButtonRadius)];
+            for (NSUInteger i = 0; i < [self.dataSource numberOfOptionButtonsInKeyboardImagePickerView:self]; i++) {
+                UIButton *currentOptionButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kKCKeyboardImagePickerViewCellOptionButtonRadius, kKCKeyboardImagePickerViewCellOptionButtonRadius)];
                 currentOptionButton.tag = i;
                 currentOptionButton.layer.masksToBounds = YES;
-                currentOptionButton.layer.cornerRadius = kKCKeyboardScrollingImagePickerViewCellOptionButtonRadius / 2.0;
-                currentOptionButton.layer.borderWidth = kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth;
+                currentOptionButton.layer.cornerRadius = kKCKeyboardImagePickerViewCellOptionButtonRadius / 2.0;
+                currentOptionButton.layer.borderWidth = kKCKeyboardImagePickerViewCellOptionButtonBorderWidth;
                 currentOptionButton.layer.borderColor = [UIColor whiteColor].CGColor;
                 [currentOptionButton addTarget:self action:@selector(didTapOptionButton:) forControlEvents:UIControlEventTouchUpInside];
                 [currentOptionButton addTarget:self action:@selector(refreshOptionButtonBackgroundColor:) forControlEvents:UIControlEventTouchDown];
@@ -154,26 +154,26 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
             return;
         }
     }
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardScrollingImagePickerView:titleForOptionButtonAtIndex:)]) {
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardImagePickerView:titleForOptionButtonAtIndex:)]) {
         for (UIButton *currentOptionButton in self.optionButtons) {
-            [currentOptionButton setTitle:[self.dataSource keyboardScrollingImagePickerView:self titleForOptionButtonAtIndex:currentOptionButton.tag] forState:UIControlStateNormal];
+            [currentOptionButton setTitle:[self.dataSource keyboardImagePickerView:self titleForOptionButtonAtIndex:currentOptionButton.tag] forState:UIControlStateNormal];
         }
     }
     
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardScrollingImagePickerView:titleColorForOptionButtonAtIndex:forState:)]) {
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardImagePickerView:titleColorForOptionButtonAtIndex:forState:)]) {
         for (UIButton *currentOptionButton in self.optionButtons) {
-            [currentOptionButton setTitleColor:[self.dataSource keyboardScrollingImagePickerView:self titleColorForOptionButtonAtIndex:currentOptionButton.tag forState:UIControlStateNormal] forState:UIControlStateNormal];
-            [currentOptionButton setTitleColor:[self.dataSource keyboardScrollingImagePickerView:self titleColorForOptionButtonAtIndex:currentOptionButton.tag forState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
+            [currentOptionButton setTitleColor:[self.dataSource keyboardImagePickerView:self titleColorForOptionButtonAtIndex:currentOptionButton.tag forState:UIControlStateNormal] forState:UIControlStateNormal];
+            [currentOptionButton setTitleColor:[self.dataSource keyboardImagePickerView:self titleColorForOptionButtonAtIndex:currentOptionButton.tag forState:UIControlStateHighlighted] forState:UIControlStateHighlighted];
         }
     }
     
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardScrollingImagePickerView:backgroundColorForOptionButtonAtIndex:forState:)]) {
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardImagePickerView:backgroundColorForOptionButtonAtIndex:forState:)]) {
         for (UIButton *currentOptionButton in self.optionButtons) {
-            currentOptionButton.backgroundColor = [self.dataSource keyboardScrollingImagePickerView:self backgroundColorForOptionButtonAtIndex:currentOptionButton.tag forState:UIControlStateNormal];
+            currentOptionButton.backgroundColor = [self.dataSource keyboardImagePickerView:self backgroundColorForOptionButtonAtIndex:currentOptionButton.tag forState:UIControlStateNormal];
         }
     }
     
-    switch ([self.dataSource numberOfOptionButtonsInKeyboardScrollingImagePickerView:self]) {
+    switch ([self.dataSource numberOfOptionButtonsInKeyboardImagePickerView:self]) {
         case 1:
             [self renderOneOptionButtonLayout];
             break;
@@ -232,8 +232,8 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 }
 
 - (void)didTapImagePickerControllerButton:(id)sender {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(didTapImagePickerControllerButtonInKeyboardScrollingImagePickerView:)]) {
-        [self.delegate didTapImagePickerControllerButtonInKeyboardScrollingImagePickerView:self];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(didTapImagePickerControllerButtonInKeyboardImagePickerView:)]) {
+        [self.delegate didTapImagePickerControllerButtonInKeyboardImagePickerView:self];
     }
 }
 
@@ -267,16 +267,16 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 - (void)refreshOptionButtonBackgroundColor:(UIButton *)optionButton {
     if (optionButton.isHighlighted) {
         [UIView animateWithDuration:0.25 animations:^{
-            if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardScrollingImagePickerView:backgroundColorForOptionButtonAtIndex:forState:)]) {
-                optionButton.backgroundColor = [self.dataSource keyboardScrollingImagePickerView:self backgroundColorForOptionButtonAtIndex:optionButton.tag forState:UIControlStateHighlighted];
+            if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardImagePickerView:backgroundColorForOptionButtonAtIndex:forState:)]) {
+                optionButton.backgroundColor = [self.dataSource keyboardImagePickerView:self backgroundColorForOptionButtonAtIndex:optionButton.tag forState:UIControlStateHighlighted];
             } else {
                 optionButton.backgroundColor = [UIColor whiteColor];
             }
         }];
     } else {
         [UIView animateWithDuration:0.25 animations:^{
-            if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardScrollingImagePickerView:backgroundColorForOptionButtonAtIndex:forState:)]) {
-                optionButton.backgroundColor = [self.dataSource keyboardScrollingImagePickerView:self backgroundColorForOptionButtonAtIndex:optionButton.tag forState:UIControlStateNormal];
+            if (self.dataSource && [self.dataSource respondsToSelector:@selector(keyboardImagePickerView:backgroundColorForOptionButtonAtIndex:forState:)]) {
+                optionButton.backgroundColor = [self.dataSource keyboardImagePickerView:self backgroundColorForOptionButtonAtIndex:optionButton.tag forState:UIControlStateNormal];
             } else {
                 optionButton.backgroundColor = [UIColor lightGrayColor];
             }
@@ -285,8 +285,8 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 }
 
 - (void)didTapOptionButton:(UIButton *)optionButton {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardScrollingImagePickerView:didTapOptionButton:atIndex:)]) {
-        [self.delegate keyboardScrollingImagePickerView:self didTapOptionButton:optionButton atIndex:self.currentSelectedIndexPath.row];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardImagePickerView:didTapOptionButton:atIndex:)]) {
+        [self.delegate keyboardImagePickerView:self didTapOptionButton:optionButton atIndex:self.currentSelectedIndexPath.row];
         [self collectionView:self.imagesCollectionView didDeselectItemAtIndexPath:self.currentSelectedIndexPath];
         optionButton.highlighted = NO;
     }
@@ -296,16 +296,16 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfImagesInKeyboardScrollingImagePickerView:)]) {
-        return [self.dataSource numberOfImagesInKeyboardScrollingImagePickerView:self];
+    if (self.dataSource && [self.dataSource respondsToSelector:@selector(numberOfImagesInKeyboardImagePickerView:)]) {
+        return [self.dataSource numberOfImagesInKeyboardImagePickerView:self];
     } else {
         return 0;
     }
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KeyboardScrollingImagePickerViewCell" forIndexPath:indexPath];
-    cell.backgroundView = [[UIImageView alloc] initWithImage:[self.dataSource keyboardScrollingImagePickerView:self imageAtIndex:indexPath.row]];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"KeyboardImagePickerViewCell" forIndexPath:indexPath];
+    cell.backgroundView = [[UIImageView alloc] initWithImage:[self.dataSource keyboardImagePickerView:self imageAtIndex:indexPath.row]];
     return cell;
 }
 
@@ -320,8 +320,8 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
 #pragma mark - UICollectionViewDelegate
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardScrollingImagePickerView:willDisplayImageAtIndex:)]) {
-        [self.delegate keyboardScrollingImagePickerView:self willDisplayImageAtIndex:indexPath.item];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardImagePickerView:willDisplayImageAtIndex:)]) {
+        [self.delegate keyboardImagePickerView:self willDisplayImageAtIndex:indexPath.item];
     }
 }
 
@@ -335,8 +335,8 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
     [self hideOptionButtonsViewInCollectionViewCell:[collectionView cellForItemAtIndexPath:indexPath] animated:YES];
     self.currentSelectedIndexPath = nil;
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardScrollingImagePickerView:didDeselectItemAtIndex:)]) {
-        [self.delegate keyboardScrollingImagePickerView:self didDeselectItemAtIndex:indexPath.row];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardImagePickerView:didDeselectItemAtIndex:)]) {
+        [self.delegate keyboardImagePickerView:self didDeselectItemAtIndex:indexPath.row];
     }
 }
 
@@ -349,8 +349,8 @@ CGFloat const kKCKeyboardScrollingImagePickerViewCellOptionButtonBorderWidth = 2
         [self showOptionButtonsViewInCollectionViewCell:[collectionView cellForItemAtIndexPath:indexPath] animated:YES];
     }
     
-    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardScrollingImagePickerView:didSelectItemAtIndex:)]) {
-        [self.delegate keyboardScrollingImagePickerView:self didSelectItemAtIndex:indexPath.row];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(keyboardImagePickerView:didSelectItemAtIndex:)]) {
+        [self.delegate keyboardImagePickerView:self didSelectItemAtIndex:indexPath.row];
     }
 }
 

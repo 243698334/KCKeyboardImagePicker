@@ -1,6 +1,6 @@
 //
-//  KCKeyboardScrollingImagePickerView.h
-//  https://github.com/Kev1nChen/KCKeyboardScrollingImagePicker
+//  KCKeyboardImagePickerView.h
+//  https://github.com/Kev1nChen/KCKeyboardImagePicker
 //
 //  Copyright (c) 2015 Kevin Yufei Chen
 //  Special thanks to Chengkan Huang
@@ -28,48 +28,48 @@
 
 #import <UIKit/UIKit.h>
 
-@class KCKeyboardScrollingImagePickerView;
+@class KCKeyboardImagePickerView;
 
 /**
  @abstract The methods of this protocol allow the delegate to manage selections, 
  deselections, tap events of option buttons and image picker controller button, and 
  to be notified of the need to load more images.
  */
-@protocol KCKeyboardScrollingImagePickerViewDelegate <NSObject>
+@protocol KCKeyboardImagePickerViewDelegate <NSObject>
 
 @optional
 /**
  @abstract Tells the delegate that an option button was tapped. 
  @discussion Implement this method and perform different tasks based on the indices
  of the option buttons.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object 
+ @param keyboardImagePickerView A KeyboardImagePickerView object 
  informing the delegate about the tap event.
  @param optionButton A reference to the button that was tapped.
  @param index The index of the tapped option button in all option buttons
  */
-- (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView didTapOptionButton:(UIButton *)optionButton atIndex:(NSInteger)index;
+- (void)keyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView didTapOptionButton:(UIButton *)optionButton atIndex:(NSInteger)index;
 
 @optional
 /**
  @abstract Tells the delegate that an image was selected.
  @discussion During this process, a blur visual effect view will be added to the 
  `contentView` of the collection view cell.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  informing the delegate about the selection.
  @param index The index of the selected image.
  */
-- (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView didSelectItemAtIndex:(NSInteger)index;
+- (void)keyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView didSelectItemAtIndex:(NSInteger)index;
 
 @optional
 /**
  @abstract Tells the delegate that an image was deselected.
  @discussion During this process, the blur visual effect view will be removed from
  the `contentView` of the collection view cell.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  informing the delegate about the deselection.
  @param index The index of the deselected image.
  */
-- (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView didDeselectItemAtIndex:(NSInteger)index;
+- (void)keyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView didDeselectItemAtIndex:(NSInteger)index;
 
 
 @optional
@@ -79,11 +79,11 @@
  picker view is optimized for asynchronous image loading. The `updateImage:AtIndex:`
  method is expected to be called after the image is ready. Until then, there will be
  a placeholder image displayed at that cell.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  informing the delegate of such information.
  @param index The index of the image will be shown.
  */
-- (void)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView willDisplayImageAtIndex:(NSInteger)index;
+- (void)keyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView willDisplayImageAtIndex:(NSInteger)index;
 
 
 @optional
@@ -91,10 +91,10 @@
  @abstract Tells the delegate that the image picker controller button was tapped.
  @discussion It is recommanded to bring up the `UIImagePickerController` inside of
  this method.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  informing the delegate about the tap event.
  */
-- (void)didTapImagePickerControllerButtonInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView;
+- (void)didTapImagePickerControllerButtonInKeyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView;
 
 @end
 
@@ -105,66 +105,66 @@
  under different control states, background colors for option buttons under different
  control states, and the images to be selected.
  */
-@protocol KCKeyboardScrollingImagePickerViewDataSource <NSObject>
+@protocol KCKeyboardImagePickerViewDataSource <NSObject>
 
 @required
 /**
  @abstract Asks the data source for the number of images to be shown in the keyboard
- scrolling image picker view.
+  image picker view.
  @discussion This number can be changed after initialization of the picker, as more
  images are loaded.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting this information.
- @return The number of images in the keyboard scrolling image picker view.
+ @return The number of images in the keyboard  image picker view.
  */
-- (NSInteger)numberOfImagesInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView;
+- (NSInteger)numberOfImagesInKeyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView;
 
 @required
 /**
  @abstract Asks the data source for an image to display in a particular location in
- the keyboard scrolling image picker view.
+ the keyboard  image picker view.
  @discussion Since this method is called along with the data source methods for the 
  image collection view, it is suggested to return a placeholder or an immediately 
  available thumbnail instead of the actual full-sized image in order to avoid UI lag.
  You can asynchronously load images with better resolution and use the 
  `updateImage:atIndex:animated:` method to replace the placeholder or the thumbnail.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting an image which should be immediately available.
  @param index An index locating the image.
- @return A image object to be displayed in the keyboard scrolling image picker view.
+ @return A image object to be displayed in the keyboard  image picker view.
  */
-- (UIImage *)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView imageAtIndex:(NSInteger)index;
+- (UIImage *)keyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView imageAtIndex:(NSInteger)index;
 
 @required
 /**
  @abstract Asks the data source for the visibility of the image picker controller 
  button.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting this information.
  @return A boolean value indicating the visibility.
  */
-- (BOOL)isImagePickerControllerButtonVisibleInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView;
+- (BOOL)isImagePickerControllerButtonVisibleInKeyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView;
 
 @optional
 /**
  @abstract Asks the data source for the background color of the image picker 
  controller button.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting this information.
  @return An color to be used as the background color of the button.
  */
-- (UIColor *)backgroundColorForImagePickerControllerButtonInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView;
+- (UIColor *)backgroundColorForImagePickerControllerButtonInKeyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView;
 
 @optional
 /**
  @abstract Asks the data source for the background image of the image picker
  controller button.
  @discussion Will use the default image if this method is not implemented.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting this information.
  @return An image to be used as the background of the button.
  */
-- (UIImage *)backgroundImageForImagePickerControllerButtonInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView;
+- (UIImage *)backgroundImageForImagePickerControllerButtonInKeyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView;
 
 @required
 /**
@@ -177,23 +177,23 @@
  for the options buttons - the higher row contains one button and the lower row has
  two buttons. For the four buttons layout, there will be two rows and two columns with
  two buttons in each.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting this information.
- @return The number of option buttons in the keyboard scrolling image picker view.
+ @return The number of option buttons in the keyboard  image picker view.
  */
-- (NSInteger)numberOfOptionButtonsInKeyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView;
+- (NSInteger)numberOfOptionButtonsInKeyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView;
 
 @required
 /**
  @abstract Asks the data source for the titles for each option button.
  @discussion Please do not use really long words as it may not get rended perfectly in
  the circular option button.
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting this information.
  @param index An index locating the option button.
  @return A title to be displayed in the option button.
  */
-- (NSString *)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView titleForOptionButtonAtIndex:(NSInteger)index;
+- (NSString *)keyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView titleForOptionButtonAtIndex:(NSInteger)index;
 
 @optional
 /**
@@ -201,13 +201,13 @@
  different control states.
  @discussion Only needs to assign color for `UIControlStateHighlighted` and
  `UIControlStateNormal`
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting this information.
  @param index An index locating the option button.
  @param state A control state for the button.
  @return A color to be displayed in the option button for a certain control state.
  */
-- (UIColor *)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView backgroundColorForOptionButtonAtIndex:(NSInteger)index forState:(UIControlState)state;
+- (UIColor *)keyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView backgroundColorForOptionButtonAtIndex:(NSInteger)index forState:(UIControlState)state;
 
 @optional
 /**
@@ -215,33 +215,33 @@
  different control states.
  @discussion Only needs to assign color for `UIControlStateHighlighted` and
  `UIControlStateNormal`
- @param keyboardScrollingImagePickerView A KeyboardScrollingImagePickerView object
+ @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting this information.
  @param index An index locating the option button.
  @param state A control state for the button.
  @return A color to be displayed on the title of a option button for a certain control
  state.
  */
-- (UIColor *)keyboardScrollingImagePickerView:(KCKeyboardScrollingImagePickerView *)keyboardScrollingImagePickerView titleColorForOptionButtonAtIndex:(NSInteger)index forState:(UIControlState)state;
+- (UIColor *)keyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView titleColorForOptionButtonAtIndex:(NSInteger)index forState:(UIControlState)state;
 
 @end
 
 /**
- @abstract Inspired by the in-chat horizontal keyboard scrolling image picker in the
+ @abstract Inspired by the in-chat horizontal keyboard  image picker in the
  Facebook Messenger app. A user can quickly browse and select an image and perform some
  tasks without bringing up a full screen camera roll picker.
  */
-@interface KCKeyboardScrollingImagePickerView : UIView<UICollectionViewDelegateFlowLayout>
+@interface KCKeyboardImagePickerView : UIView<UICollectionViewDelegateFlowLayout>
 
 /**
  @abstract The object that acts as the delegate of the picker.
  */
-@property (nonatomic, assign) id<KCKeyboardScrollingImagePickerViewDelegate> delegate;
+@property (nonatomic, assign) id<KCKeyboardImagePickerViewDelegate> delegate;
 
 /**
  @abstract The object that acts as the data source of the picker.
  */
-@property (nonatomic, assign) id<KCKeyboardScrollingImagePickerViewDataSource> dataSource;
+@property (nonatomic, assign) id<KCKeyboardImagePickerViewDataSource> dataSource;
 
 /**
  @abstract Updates the image at an index of the collection view with or without animation.

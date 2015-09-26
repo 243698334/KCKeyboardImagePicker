@@ -11,8 +11,8 @@
 		0E8E46BB1B9D11CB00DCDF68 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E8E46BA1B9D11CB00DCDF68 /* LaunchScreen.xib */; };
 		0E8E46BE1B9D15C400DCDF68 /* DemoColorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E46BD1B9D15C400DCDF68 /* DemoColorSettingsViewController.m */; };
 		0E8E46C51B9D4BBA00DCDF68 /* DemoMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E46C01B9D4BBA00DCDF68 /* DemoMessagesViewController.m */; };
-		0E9A73471BA765DF0001ED2E /* KeyboardScrollingImagePickerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A73461BA765DF0001ED2E /* KeyboardScrollingImagePickerOptions.m */; };
-		271B312E58EC8D6C3B78939B /* Pods_KCKeyboardScrollingImagePicker_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0DE05754720268B611E3361 /* Pods_KCKeyboardScrollingImagePicker_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		0E9A73471BA765DF0001ED2E /* KeyboardImagePickerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A73461BA765DF0001ED2E /* KeyboardImagePickerOptions.m */; };
+		271B312E58EC8D6C3B78939B /* Pods_KCKeyboardImagePicker_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0DE05754720268B611E3361 /* Pods_KCKeyboardImagePicker_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -26,7 +26,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		9AC24AC9EB43EDD3CCAEA43C /* Pods_KCKeyboardScrollingImagePicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C5F0F9C50B5CB3D99A50AA /* Pods_KCKeyboardScrollingImagePicker_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9AC24AC9EB43EDD3CCAEA43C /* Pods_KCKeyboardImagePicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C5F0F9C50B5CB3D99A50AA /* Pods_KCKeyboardImagePicker_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +35,7 @@
 			containerPortal = 6003F582195388D10070C39A /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 6003F589195388D20070C39A;
-			remoteInfo = KCKeyboardScrollingImagePicker;
+			remoteInfo = KCKeyboardImagePicker;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -47,36 +47,36 @@
 		0E8E46BD1B9D15C400DCDF68 /* DemoColorSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoColorSettingsViewController.m; sourceTree = "<group>"; };
 		0E8E46BF1B9D4BBA00DCDF68 /* DemoMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoMessagesViewController.h; sourceTree = "<group>"; };
 		0E8E46C01B9D4BBA00DCDF68 /* DemoMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoMessagesViewController.m; sourceTree = "<group>"; };
-		0E9A73451BA765DF0001ED2E /* KeyboardScrollingImagePickerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardScrollingImagePickerOptions.h; sourceTree = "<group>"; };
-		0E9A73461BA765DF0001ED2E /* KeyboardScrollingImagePickerOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardScrollingImagePickerOptions.m; sourceTree = "<group>"; };
-		28C5F0F9C50B5CB3D99A50AA /* Pods_KCKeyboardScrollingImagePicker_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KCKeyboardScrollingImagePicker_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5014430ED92169A6B30A75CE /* Pods-KCKeyboardScrollingImagePicker_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KCKeyboardScrollingImagePicker_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KCKeyboardScrollingImagePicker_Example/Pods-KCKeyboardScrollingImagePicker_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		6003F58A195388D20070C39A /* KCKeyboardScrollingImagePicker_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KCKeyboardScrollingImagePicker_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0E9A73451BA765DF0001ED2E /* KeyboardImagePickerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardImagePickerOptions.h; sourceTree = "<group>"; };
+		0E9A73461BA765DF0001ED2E /* KeyboardImagePickerOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardImagePickerOptions.m; sourceTree = "<group>"; };
+		28C5F0F9C50B5CB3D99A50AA /* Pods_KCKeyboardImagePicker_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KCKeyboardImagePicker_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5014430ED92169A6B30A75CE /* Pods-KCKeyboardImagePicker_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KCKeyboardImagePicker_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KCKeyboardImagePicker_Example/Pods-KCKeyboardImagePicker_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		6003F58A195388D20070C39A /* KCKeyboardImagePicker_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KCKeyboardImagePicker_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F58D195388D20070C39A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6003F58F195388D20070C39A /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		6003F591195388D20070C39A /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		6003F595195388D20070C39A /* KCKeyboardScrollingImagePicker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KCKeyboardScrollingImagePicker-Info.plist"; sourceTree = "<group>"; };
+		6003F595195388D20070C39A /* KCKeyboardImagePicker-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KCKeyboardImagePicker-Info.plist"; sourceTree = "<group>"; };
 		6003F597195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		6003F59B195388D20070C39A /* KCKeyboardScrollingImagePicker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KCKeyboardScrollingImagePicker-Prefix.pch"; sourceTree = "<group>"; };
+		6003F59B195388D20070C39A /* KCKeyboardImagePicker-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KCKeyboardImagePicker-Prefix.pch"; sourceTree = "<group>"; };
 		6003F59C195388D20070C39A /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		6003F59D195388D20070C39A /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6003F5A5195388D20070C39A /* DemoSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DemoSettingsViewController.h; sourceTree = "<group>"; };
 		6003F5A6195388D20070C39A /* DemoSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DemoSettingsViewController.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		6003F5AE195388D20070C39A /* KCKeyboardScrollingImagePicker_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KCKeyboardScrollingImagePicker_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6003F5AE195388D20070C39A /* KCKeyboardImagePicker_Example.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KCKeyboardImagePicker_Example.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
-		7E3EBC9B52945A49DAB79BBC /* Pods-KCKeyboardScrollingImagePicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KCKeyboardScrollingImagePicker_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KCKeyboardScrollingImagePicker_Tests/Pods-KCKeyboardScrollingImagePicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		7E3EBC9B52945A49DAB79BBC /* Pods-KCKeyboardImagePicker_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KCKeyboardImagePicker_Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KCKeyboardImagePicker_Tests/Pods-KCKeyboardImagePicker_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		92C87278F6B24816C7B8B58C /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
-		A0DE05754720268B611E3361 /* Pods_KCKeyboardScrollingImagePicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KCKeyboardScrollingImagePicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		AB816032A35AC52BA59535A1 /* KCKeyboardScrollingImagePicker.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KCKeyboardScrollingImagePicker.podspec; path = ../KCKeyboardScrollingImagePicker.podspec; sourceTree = "<group>"; };
+		A0DE05754720268B611E3361 /* Pods_KCKeyboardImagePicker_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KCKeyboardImagePicker_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AB816032A35AC52BA59535A1 /* KCKeyboardImagePicker.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = KCKeyboardImagePicker.podspec; path = ../KCKeyboardImagePicker.podspec; sourceTree = "<group>"; };
 		D168D3DF570495B887F6CDDA /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
-		F54F648AD8885B2003A59C65 /* Pods-KCKeyboardScrollingImagePicker_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KCKeyboardScrollingImagePicker_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-KCKeyboardScrollingImagePicker_Example/Pods-KCKeyboardScrollingImagePicker_Example.release.xcconfig"; sourceTree = "<group>"; };
-		F93F8B8DCE09563C7837FAF5 /* Pods-KCKeyboardScrollingImagePicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KCKeyboardScrollingImagePicker_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KCKeyboardScrollingImagePicker_Tests/Pods-KCKeyboardScrollingImagePicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		F54F648AD8885B2003A59C65 /* Pods-KCKeyboardImagePicker_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KCKeyboardImagePicker_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-KCKeyboardImagePicker_Example/Pods-KCKeyboardImagePicker_Example.release.xcconfig"; sourceTree = "<group>"; };
+		F93F8B8DCE09563C7837FAF5 /* Pods-KCKeyboardImagePicker_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KCKeyboardImagePicker_Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-KCKeyboardImagePicker_Tests/Pods-KCKeyboardImagePicker_Tests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +87,7 @@
 				6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */,
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
-				271B312E58EC8D6C3B78939B /* Pods_KCKeyboardScrollingImagePicker_Example.framework in Frameworks */,
+				271B312E58EC8D6C3B78939B /* Pods_KCKeyboardImagePicker_Example.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -98,7 +98,7 @@
 				6003F5B0195388D20070C39A /* XCTest.framework in Frameworks */,
 				6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F5B1195388D20070C39A /* Foundation.framework in Frameworks */,
-				9AC24AC9EB43EDD3CCAEA43C /* Pods_KCKeyboardScrollingImagePicker_Tests.framework in Frameworks */,
+				9AC24AC9EB43EDD3CCAEA43C /* Pods_KCKeyboardImagePicker_Tests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,10 +108,10 @@
 		43041C64431985D963B8FAB3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				5014430ED92169A6B30A75CE /* Pods-KCKeyboardScrollingImagePicker_Example.debug.xcconfig */,
-				F54F648AD8885B2003A59C65 /* Pods-KCKeyboardScrollingImagePicker_Example.release.xcconfig */,
-				7E3EBC9B52945A49DAB79BBC /* Pods-KCKeyboardScrollingImagePicker_Tests.debug.xcconfig */,
-				F93F8B8DCE09563C7837FAF5 /* Pods-KCKeyboardScrollingImagePicker_Tests.release.xcconfig */,
+				5014430ED92169A6B30A75CE /* Pods-KCKeyboardImagePicker_Example.debug.xcconfig */,
+				F54F648AD8885B2003A59C65 /* Pods-KCKeyboardImagePicker_Example.release.xcconfig */,
+				7E3EBC9B52945A49DAB79BBC /* Pods-KCKeyboardImagePicker_Tests.debug.xcconfig */,
+				F93F8B8DCE09563C7837FAF5 /* Pods-KCKeyboardImagePicker_Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -120,7 +120,7 @@
 			isa = PBXGroup;
 			children = (
 				60FF7A9C1954A5C5007DD14C /* Podspec Metadata */,
-				6003F593195388D20070C39A /* Example for KCKeyboardScrollingImagePicker */,
+				6003F593195388D20070C39A /* Example for KCKeyboardImagePicker */,
 				6003F5B5195388D20070C39A /* Tests */,
 				6003F58C195388D20070C39A /* Frameworks */,
 				6003F58B195388D20070C39A /* Products */,
@@ -131,8 +131,8 @@
 		6003F58B195388D20070C39A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6003F58A195388D20070C39A /* KCKeyboardScrollingImagePicker_Example.app */,
-				6003F5AE195388D20070C39A /* KCKeyboardScrollingImagePicker_Tests.xctest */,
+				6003F58A195388D20070C39A /* KCKeyboardImagePicker_Example.app */,
+				6003F5AE195388D20070C39A /* KCKeyboardImagePicker_Example.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -144,13 +144,13 @@
 				6003F58F195388D20070C39A /* CoreGraphics.framework */,
 				6003F591195388D20070C39A /* UIKit.framework */,
 				6003F5AF195388D20070C39A /* XCTest.framework */,
-				A0DE05754720268B611E3361 /* Pods_KCKeyboardScrollingImagePicker_Example.framework */,
-				28C5F0F9C50B5CB3D99A50AA /* Pods_KCKeyboardScrollingImagePicker_Tests.framework */,
+				A0DE05754720268B611E3361 /* Pods_KCKeyboardImagePicker_Example.framework */,
+				28C5F0F9C50B5CB3D99A50AA /* Pods_KCKeyboardImagePicker_Tests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		6003F593195388D20070C39A /* Example for KCKeyboardScrollingImagePicker */ = {
+		6003F593195388D20070C39A /* Example for KCKeyboardImagePicker */ = {
 			isa = PBXGroup;
 			children = (
 				6003F59C195388D20070C39A /* AppDelegate.h */,
@@ -163,23 +163,23 @@
 				0E8E46C01B9D4BBA00DCDF68 /* DemoMessagesViewController.m */,
 				6003F5A5195388D20070C39A /* DemoSettingsViewController.h */,
 				6003F5A6195388D20070C39A /* DemoSettingsViewController.m */,
-				0E9A73451BA765DF0001ED2E /* KeyboardScrollingImagePickerOptions.h */,
-				0E9A73461BA765DF0001ED2E /* KeyboardScrollingImagePickerOptions.m */,
+				0E9A73451BA765DF0001ED2E /* KeyboardImagePickerOptions.h */,
+				0E9A73461BA765DF0001ED2E /* KeyboardImagePickerOptions.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				0E8E46BA1B9D11CB00DCDF68 /* LaunchScreen.xib */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
-			name = "Example for KCKeyboardScrollingImagePicker";
-			path = KCKeyboardScrollingImagePicker;
+			name = "Example for KCKeyboardImagePicker";
+			path = KCKeyboardImagePicker;
 			sourceTree = "<group>";
 		};
 		6003F594195388D20070C39A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				6003F595195388D20070C39A /* KCKeyboardScrollingImagePicker-Info.plist */,
+				6003F595195388D20070C39A /* KCKeyboardImagePicker-Info.plist */,
 				6003F596195388D20070C39A /* InfoPlist.strings */,
 				6003F599195388D20070C39A /* main.m */,
-				6003F59B195388D20070C39A /* KCKeyboardScrollingImagePicker-Prefix.pch */,
+				6003F59B195388D20070C39A /* KCKeyboardImagePicker-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -206,7 +206,7 @@
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
-				AB816032A35AC52BA59535A1 /* KCKeyboardScrollingImagePicker.podspec */,
+				AB816032A35AC52BA59535A1 /* KCKeyboardImagePicker.podspec */,
 				92C87278F6B24816C7B8B58C /* README.md */,
 				D168D3DF570495B887F6CDDA /* LICENSE */,
 			);
@@ -216,9 +216,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		6003F589195388D20070C39A /* KCKeyboardScrollingImagePicker_Example */ = {
+		6003F589195388D20070C39A /* KCKeyboardImagePicker_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "KCKeyboardScrollingImagePicker_Example" */;
+			buildConfigurationList = 6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "KCKeyboardImagePicker_Example" */;
 			buildPhases = (
 				79D3EA386860C856A3608C3E /* Check Pods Manifest.lock */,
 				6003F586195388D20070C39A /* Sources */,
@@ -231,14 +231,14 @@
 			);
 			dependencies = (
 			);
-			name = KCKeyboardScrollingImagePicker_Example;
-			productName = KCKeyboardScrollingImagePicker;
-			productReference = 6003F58A195388D20070C39A /* KCKeyboardScrollingImagePicker_Example.app */;
+			name = KCKeyboardImagePicker_Example;
+			productName = KCKeyboardImagePicker;
+			productReference = 6003F58A195388D20070C39A /* KCKeyboardImagePicker_Example.app */;
 			productType = "com.apple.product-type.application";
 		};
-		6003F5AD195388D20070C39A /* KCKeyboardScrollingImagePicker_Tests */ = {
+		6003F5AD195388D20070C39A /* KCKeyboardImagePicker_Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "KCKeyboardScrollingImagePicker_Tests" */;
+			buildConfigurationList = 6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "KCKeyboardImagePicker_Tests" */;
 			buildPhases = (
 				F3BF62A21D92C7511EA67BAA /* Check Pods Manifest.lock */,
 				6003F5AA195388D20070C39A /* Sources */,
@@ -252,9 +252,9 @@
 			dependencies = (
 				6003F5B4195388D20070C39A /* PBXTargetDependency */,
 			);
-			name = KCKeyboardScrollingImagePicker_Tests;
-			productName = KCKeyboardScrollingImagePickerTests;
-			productReference = 6003F5AE195388D20070C39A /* KCKeyboardScrollingImagePicker_Tests.xctest */;
+			name = KCKeyboardImagePicker_Tests;
+			productName = KCKeyboardImagePickerTests;
+			productReference = 6003F5AE195388D20070C39A /* KCKeyboardImagePicker_Example.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -272,7 +272,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "KCKeyboardScrollingImagePicker" */;
+			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "KCKeyboardImagePicker" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -285,8 +285,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				6003F589195388D20070C39A /* KCKeyboardScrollingImagePicker_Example */,
-				6003F5AD195388D20070C39A /* KCKeyboardScrollingImagePicker_Tests */,
+				6003F589195388D20070C39A /* KCKeyboardImagePicker_Example */,
+				6003F5AD195388D20070C39A /* KCKeyboardImagePicker_Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -325,7 +325,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KCKeyboardScrollingImagePicker_Tests/Pods-KCKeyboardScrollingImagePicker_Tests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KCKeyboardImagePicker_Tests/Pods-KCKeyboardImagePicker_Tests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5D28F0FFCCB391C4C8736C74 /* Embed Pods Frameworks */ = {
@@ -340,7 +340,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KCKeyboardScrollingImagePicker_Example/Pods-KCKeyboardScrollingImagePicker_Example-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KCKeyboardImagePicker_Example/Pods-KCKeyboardImagePicker_Example-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		79D3EA386860C856A3608C3E /* Check Pods Manifest.lock */ = {
@@ -370,7 +370,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KCKeyboardScrollingImagePicker_Tests/Pods-KCKeyboardScrollingImagePicker_Tests-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KCKeyboardImagePicker_Tests/Pods-KCKeyboardImagePicker_Tests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		A8F4128B4C50831B6F56031D /* Copy Pods Resources */ = {
@@ -385,7 +385,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KCKeyboardScrollingImagePicker_Example/Pods-KCKeyboardScrollingImagePicker_Example-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-KCKeyboardImagePicker_Example/Pods-KCKeyboardImagePicker_Example-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F3BF62A21D92C7511EA67BAA /* Check Pods Manifest.lock */ = {
@@ -413,7 +413,7 @@
 				6003F59E195388D20070C39A /* AppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* DemoSettingsViewController.m in Sources */,
 				0E8E46B91B9C3A4C00DCDF68 /* DemoButtonSettingsViewController.m in Sources */,
-				0E9A73471BA765DF0001ED2E /* KeyboardScrollingImagePickerOptions.m in Sources */,
+				0E9A73471BA765DF0001ED2E /* KeyboardImagePickerOptions.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				0E8E46BE1B9D15C400DCDF68 /* DemoColorSettingsViewController.m in Sources */,
 				0E8E46C51B9D4BBA00DCDF68 /* DemoMessagesViewController.m in Sources */,
@@ -433,7 +433,7 @@
 /* Begin PBXTargetDependency section */
 		6003F5B4195388D20070C39A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 6003F589195388D20070C39A /* KCKeyboardScrollingImagePicker_Example */;
+			target = 6003F589195388D20070C39A /* KCKeyboardImagePicker_Example */;
 			targetProxy = 6003F5B3195388D20070C39A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -533,16 +533,16 @@
 		};
 		6003F5C0195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5014430ED92169A6B30A75CE /* Pods-KCKeyboardScrollingImagePicker_Example.debug.xcconfig */;
+			baseConfigurationReference = 5014430ED92169A6B30A75CE /* Pods-KCKeyboardImagePicker_Example.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KCKeyboardScrollingImagePicker/KCKeyboardScrollingImagePicker-Prefix.pch";
-				INFOPLIST_FILE = "KCKeyboardScrollingImagePicker/KCKeyboardScrollingImagePicker-Info.plist";
+				GCC_PREFIX_HEADER = "KCKeyboardImagePicker/KCKeyboardImagePicker-Prefix.pch";
+				INFOPLIST_FILE = "KCKeyboardImagePicker/KCKeyboardImagePicker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.KCKeyboardImagePicker-Example";
+				PRODUCT_NAME = KCKeyboardImagePicker_Example;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -550,16 +550,16 @@
 		};
 		6003F5C1195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F54F648AD8885B2003A59C65 /* Pods-KCKeyboardScrollingImagePicker_Example.release.xcconfig */;
+			baseConfigurationReference = F54F648AD8885B2003A59C65 /* Pods-KCKeyboardImagePicker_Example.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "KCKeyboardScrollingImagePicker/KCKeyboardScrollingImagePicker-Prefix.pch";
-				INFOPLIST_FILE = "KCKeyboardScrollingImagePicker/KCKeyboardScrollingImagePicker-Info.plist";
+				GCC_PREFIX_HEADER = "KCKeyboardImagePicker/KCKeyboardImagePicker-Prefix.pch";
+				INFOPLIST_FILE = "KCKeyboardImagePicker/KCKeyboardImagePicker-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MODULE_NAME = ExampleApp;
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.KCKeyboardImagePicker-Example";
+				PRODUCT_NAME = KCKeyboardImagePicker_Example;
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -567,7 +567,7 @@
 		};
 		6003F5C3195388D20070C39A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7E3EBC9B52945A49DAB79BBC /* Pods-KCKeyboardScrollingImagePicker_Tests.debug.xcconfig */;
+			baseConfigurationReference = 7E3EBC9B52945A49DAB79BBC /* Pods-KCKeyboardImagePicker_Tests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -583,15 +583,15 @@
 				);
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KCKeyboardScrollingImagePicker_Example.app/KCKeyboardScrollingImagePicker_Example";
+				PRODUCT_NAME = KCKeyboardImagePicker_Example;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KCKeyboardImagePicker_Example.app/KCKeyboardImagePicker_Example";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
 		};
 		6003F5C4195388D20070C39A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F93F8B8DCE09563C7837FAF5 /* Pods-KCKeyboardScrollingImagePicker_Tests.release.xcconfig */;
+			baseConfigurationReference = F93F8B8DCE09563C7837FAF5 /* Pods-KCKeyboardImagePicker_Tests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -603,8 +603,8 @@
 				GCC_PREFIX_HEADER = "Tests/Tests-Prefix.pch";
 				INFOPLIST_FILE = "Tests/Tests-Info.plist";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KCKeyboardScrollingImagePicker_Example.app/KCKeyboardScrollingImagePicker_Example";
+				PRODUCT_NAME = KCKeyboardImagePicker_Example;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KCKeyboardImagePicker_Example.app/KCKeyboardImagePicker_Example";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;
@@ -612,7 +612,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		6003F585195388D10070C39A /* Build configuration list for PBXProject "KCKeyboardScrollingImagePicker" */ = {
+		6003F585195388D10070C39A /* Build configuration list for PBXProject "KCKeyboardImagePicker" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5BD195388D20070C39A /* Debug */,
@@ -621,7 +621,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "KCKeyboardScrollingImagePicker_Example" */ = {
+		6003F5BF195388D20070C39A /* Build configuration list for PBXNativeTarget "KCKeyboardImagePicker_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C0195388D20070C39A /* Debug */,
@@ -630,7 +630,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "KCKeyboardScrollingImagePicker_Tests" */ = {
+		6003F5C2195388D20070C39A /* Build configuration list for PBXNativeTarget "KCKeyboardImagePicker_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				6003F5C3195388D20070C39A /* Debug */,

@@ -1,6 +1,6 @@
 //
 //  KCViewController.m
-//  KCKeyboardScrollingImagePicker
+//  KCKeyboardImagePicker
 //
 //  Created by Kev1nChen on 09/05/2015.
 //  Copyright (c) 2015 Kev1nChen. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import "DemoSettingsViewController.h"
 
-#import <KCKeyboardScrollingImagePicker/KCKeyboardScrollingImagePickerView.h>
+#import <KCKeyboardImagePicker/KCKeyboardImagePickerView.h>
 #import "DemoButtonSettingsViewController.h"
 #import "DemoMessagesViewController.h"
 
@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) DemoMessagesViewController *demoMessagesViewController;
-@property (nonatomic, strong) KeyboardScrollingImagePickerOptions *imagePickerOptions;
+@property (nonatomic, strong) KeyboardImagePickerOptions *imagePickerOptions;
 
 @end
 
@@ -43,7 +43,7 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
     
     self.navigationItem.title = @"Demo Settings";
     
-    self.imagePickerOptions = [[KeyboardScrollingImagePickerOptions alloc] init];
+    self.imagePickerOptions = [[KeyboardImagePickerOptions alloc] init];
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
@@ -150,7 +150,7 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
         case kShowDemoSectionIndex:
             return nil;
         case kAppearenceSectionIndex:
-            return @"Image Picker Controller Button is the one floating on top of the Keyboard Scrolling Image Picker View that brings up the default UIImagePickerController.";
+            return @"Image Picker Controller Button is the one floating on top of the Keyboard  Image Picker View that brings up the default UIImagePickerController.";
         case kOptionButtonsSectionIndex:
             return @"Option Buttons are the ones that become visible when the user taps on an image. There can be up to 4 option buttons.";
         default:

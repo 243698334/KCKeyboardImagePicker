@@ -1,14 +1,14 @@
 //
-//  KeyboardScrollingImagePickerOptions.m
-//  KCKeyboardScrollingImagePicker
+//  KeyboardImagePickerOptions.m
+//  KCKeyboardImagePicker
 //
 //  Created by Kevin Yufei Chen on 9/14/15.
 //  Copyright (c) 2015 Kev1nChen. All rights reserved.
 //
 
-#import "KeyboardScrollingImagePickerOptions.h"
+#import "KeyboardImagePickerOptions.h"
 
-@implementation KeyboardScrollingImagePickerOptions
+@implementation KeyboardImagePickerOptions
 
 - (id)init {
     if (self = [super init]) {
@@ -22,9 +22,9 @@
         self.numberOfOptionButtons = 1;
         self.optionButtonsAlpha = 0.8;
         self.optionButtonTitles = @[@"Send"];
-        self.optionButtonColors = @[[UIColor whiteColor]];
-        self.optionButtonTitleNormalColors = @[[UIColor blackColor]];
-        self.optionButtonTitleHighlightedColors = @[[UIColor lightGrayColor]];
+        self.optionButtonColors = @[[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
+        self.optionButtonTitleNormalColors = @[[UIColor whiteColor]];
+        self.optionButtonTitleHighlightedColors = @[[UIColor whiteColor]];
     }
     return self;
 }

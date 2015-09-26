@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
-  s.name             = "KCKeyboardScrollingImagePicker"
-  s.version          = "0.2.0"
+  s.name             = "KCKeyboardImagePicker"
+  s.version          = "0.3.0"
   s.summary          = "A keyboard-sized scrolling image picker for IM apps."
 
   s.description      = <<-DESC
@@ -9,17 +9,17 @@ Pod::Spec.new do |s|
                        Check out the demo for more details.
                        DESC
 
-  s.homepage         = "https://github.com/Kev1nChen/KCKeyboardScrollingImagePicker"
+  s.homepage         = "https://github.com/Kev1nChen/KCKeyboardImagePicker"
   s.license          = 'MIT'
   s.author           = 'Kevin Yufei Chen'
-  s.source           = { :git => "https://github.com/Kev1nChen/KCKeyboardScrollingImagePicker.git", :tag => "#{s.version}" }
+  s.source           = { :git => "https://github.com/Kev1nChen/KCKeyboardImagePicker.git", :tag => "#{s.version}" }
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
   s.resource_bundles = {
-    'KCKeyboardScrollingImagePicker' => ['Pod/Assets/*.png']
+    'KCKeyboardImagePicker' => ['Pod/Assets/*.png']
   }
 
   s.public_header_files = 'Pod/Classes/*.h'

@@ -1,6 +1,6 @@
 //
-//  KeyboardScrollingImagePickerOptions.h
-//  KCKeyboardScrollingImagePicker
+//  KeyboardImagePickerOptions.h
+//  KCKeyboardImagePicker
 //
 //  Created by Kevin Yufei Chen on 9/14/15.
 //  Copyright (c) 2015 Kev1nChen. All rights reserved.
@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface KeyboardScrollingImagePickerOptions : NSObject
+@interface KeyboardImagePickerOptions : NSObject
 
 @property (nonatomic, strong) UIColor *backgroundColor;
 

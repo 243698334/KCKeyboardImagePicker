@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "KCKeyboardScrollingImagePicker_Example.app"
-               BlueprintName = "KCKeyboardScrollingImagePicker_Example"
-               ReferencedContainer = "container:KCKeyboardScrollingImagePicker.xcodeproj">
+               BuildableName = "KCKeyboardImagePicker_Example.app"
+               BlueprintName = "KCKeyboardImagePicker_Example"
+               ReferencedContainer = "container:KCKeyboardImagePicker.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "6003F5AD195388D20070C39A"
-               BuildableName = "KCKeyboardScrollingImagePicker_Tests.xctest"
-               BlueprintName = "KCKeyboardScrollingImagePicker_Tests"
-               ReferencedContainer = "container:KCKeyboardScrollingImagePicker.xcodeproj">
+               BuildableName = "KCKeyboardImagePicker_Example.xctest"
+               BlueprintName = "KCKeyboardImagePicker_Tests"
+               ReferencedContainer = "container:KCKeyboardImagePicker.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -43,9 +43,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "KCKeyboardScrollingImagePicker_Example.app"
-            BlueprintName = "KCKeyboardScrollingImagePicker_Example"
-            ReferencedContainer = "container:KCKeyboardScrollingImagePicker.xcodeproj">
+            BuildableName = "KCKeyboardImagePicker_Example.app"
+            BlueprintName = "KCKeyboardImagePicker_Example"
+            ReferencedContainer = "container:KCKeyboardImagePicker.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -66,9 +66,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "KCKeyboardScrollingImagePicker_Example.app"
-            BlueprintName = "KCKeyboardScrollingImagePicker_Example"
-            ReferencedContainer = "container:KCKeyboardScrollingImagePicker.xcodeproj">
+            BuildableName = "KCKeyboardImagePicker_Example.app"
+            BlueprintName = "KCKeyboardImagePicker_Example"
+            ReferencedContainer = "container:KCKeyboardImagePicker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -85,9 +85,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "KCKeyboardScrollingImagePicker_Example.app"
-            BlueprintName = "KCKeyboardScrollingImagePicker_Example"
-            ReferencedContainer = "container:KCKeyboardScrollingImagePicker.xcodeproj">
+            BuildableName = "KCKeyboardImagePicker_Example.app"
+            BlueprintName = "KCKeyboardImagePicker_Example"
+            ReferencedContainer = "container:KCKeyboardImagePicker.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
