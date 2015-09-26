@@ -30,29 +30,103 @@
 
 #import "KCKeyboardImagePickerView.h"
 
+/**
+ @abstract A KCKeyboardImagePickerAction object represents an action that can be 
+ taken when tapping either the image picker controller button or an option button
+ in the picker. The number of option buttons displayed on each image is determined
+ by the number of unique actions added into the picker controller.
+ */
 @interface KCKeyboardImagePickerAction : NSObject
 
+/**
+ @abstract Create and return an action for the image picker controller button.
+ @param viewController A view controller who is going to present the full screen
+ UIImagePickerController.
+ @param handler A block to execute when the user selects an image from the full
+ screen UIImagePickerController.
+ */
 + (instancetype)actionWithImagePickerControllerButtonParentViewController:(UIViewController *)viewController handler:(void (^) (UIImage *selectedImage))handler;
+
+/**
+ @abstract Create and return an action for an option button.
+ @param tag An integer as the identifer of the option button. It will be used to
+ match the style of the option button.
+ @param title A string as the title of the action, which will displayed on the
+ corresponding option button.
+ @param handler A block to execute when the user taps on the corresponding option 
+ button of this action.
+ */
 + (instancetype)actionWithOptionButtonTag:(NSInteger)tag title:(NSString *)title handler:(void (^) (UIImage *selectedImage))handler;
 
 @end
 
+/**
+ @abstract A KCKeyboardImagePickerStyle object represents the style configuration
+ applied on either the image picker controller button or an option button in the 
+ picker. A style is optional for a button. It will matched by the tag with an 
+ action object. 
+ */
 @interface KCKeyboardImagePickerStyle : NSObject
 
+/**
+ @abstract Create and return a style for the image picker controller button.
+ @param backgroundColor The background color of the button.
+ @param image The image displayed on this button.
+ */
 + (instancetype)styleWithImagePickerControllerBackgroundColor:(UIColor *)color image:(UIImage *)image;
+
+/**
+ @abstract Create and return a style for an option button.
+ @param tag An integer as the identifer of the option button. It will be used to
+ match the action of the option button.
+ @param titleColor The color of the title displayed on this button.
+ @param backgroundColor The background color of the button.
+ */
 + (instancetype)styleWithOptionButtonTag:(NSInteger)tag titleColor:(UIColor *)titleColor backgroundColor:(UIColor *)backgroundColor;
 
 @end
 
 @interface KCKeyboardImagePickerController : NSObject
 
+/**
+ @abstract The keyboard image picker view instance.
+ */
 @property (nonatomic, strong) KCKeyboardImagePickerView *imagePickerView;
+
+/**
+ @abstract The frame of the keyboard image picker view.
+ @discussion It should always be the same as the keyboard's frame.
+ */
 @property (nonatomic, assign) CGRect keyboardFrame;
 
+/**
+ @abstract Attaches an action to the keyboard image picker view.
+ @discussion There should not be more than 4 actions for option buttons and 1 for
+ the image picker controller button. The exceeded actions will be ignored. The 
+ actions are matched with the styles by their tags.
+ @param action An KCKeyboardImagePickerAction object.
+ */
 - (void)addAction:(KCKeyboardImagePickerAction *)action;
+
+/**
+ @abstract Attaches a style to the keyboard image picker view.
+ @discussion There should not be more than 4 styles for option buttons and 1 for
+ the image picker controller button. The exceeded actions will be ignored. The
+ styles are matched with the actions by their tags.
+ @param action An KCKeyboardImagePickerAction object.
+ */
 - (void)addStyle:(KCKeyboardImagePickerStyle *)style;
 
+/**
+ @abstract Show the keyboard image picker view.
+ @param animated A flag indicating if the process should be aniamted.
+ */
 - (void)showKeyboardImagePickerViewAnimated:(BOOL)animated;
+
+/**
+ @abstract Hide the keyboard image picker view.
+ @param animated A flag indicating if the process should be aniamted.
+ */
 - (void)hideKeyboardImagePickerViewAnimated:(BOOL)animated;
 
 @end
