@@ -113,7 +113,7 @@ To dismiss the picker,
 [self.keyboardImagePickerController hideKeyboardImagePickerViewAnimated:animated];
 ````
 
-Finally, don't forget to implement the methods in `KCKeyboardImagePickerViewDataSource` and `KCKeyboardImagePickerViewDelegate`. So you can customize the color, title, and the number of the option buttons. 
+Alternatively, you can have your own implementation to adopt `KCKeyboardImagePickerViewDataSource` and `KCKeyboardImagePickerViewDelegate`. So you can customize the source of the images and other styles of the picker. 
 
 ## Installation
 
