@@ -35,7 +35,7 @@
     
     self.demoMessages = [[NSMutableArray alloc] initWithObjects:
                          [[JSQMessage alloc] initWithSenderId:@"KC" senderDisplayName:@"Kev1nChen" date:[NSDate date] text:@"Tap on the accessory icon to toggle the picker."],
-                         [[JSQMessage alloc] initWithSenderId:@"KC" senderDisplayName:@"Kev1nChen" date:[NSDate date] text:@"This is a demo of the integration with JSQMessagesVC. It should easily work with your own IM interface as well."],
+                         [[JSQMessage alloc] initWithSenderId:@"KC" senderDisplayName:@"Kev1nChen" date:[NSDate date] text:@"When running for the first time, grant the access and re-enter this chat window."],
                          nil];
     
     self.isKeyboardImagePickerViewActive = NO;
