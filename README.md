@@ -6,7 +6,9 @@
 
 ## Screenshots
 
+<a href="https://github.com/Kev1nChen/KCKeyboardImagePicker">
 ![Demo](https://raw.githubusercontent.com/Kev1nChen/KCKeyboardImagePicker/master/Screenshots/demo.gif)
+</a>
 ![Screenshot2](https://raw.githubusercontent.com/Kev1nChen/KCKeyboardImagePicker/master/Screenshots/screenshot2.jpg)
 ![Screenshot3](https://raw.githubusercontent.com/Kev1nChen/KCKeyboardImagePicker/master/Screenshots/screenshot3.jpg)
 
