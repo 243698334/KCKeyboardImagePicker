@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "KCKeyboardImagePicker"
-  s.version          = "0.3.0"
+  s.version          = "0.3.1"
   s.summary          = "A keyboard-sized scrolling image picker for IM apps."
 
   s.description      = <<-DESC
