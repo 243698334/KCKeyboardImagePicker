@@ -7,11 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E8E46B91B9C3A4C00DCDF68 /* DemoButtonSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E46B81B9C3A4C00DCDF68 /* DemoButtonSettingsViewController.m */; };
+		0E1A08921BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A08911BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0E8E46B91B9C3A4C00DCDF68 /* DemoOptionButtonSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E46B81B9C3A4C00DCDF68 /* DemoOptionButtonSettingsViewController.m */; };
 		0E8E46BB1B9D11CB00DCDF68 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E8E46BA1B9D11CB00DCDF68 /* LaunchScreen.xib */; };
 		0E8E46BE1B9D15C400DCDF68 /* DemoColorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E46BD1B9D15C400DCDF68 /* DemoColorSettingsViewController.m */; };
 		0E8E46C51B9D4BBA00DCDF68 /* DemoMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E46C01B9D4BBA00DCDF68 /* DemoMessagesViewController.m */; };
-		0E9A73471BA765DF0001ED2E /* KeyboardImagePickerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A73461BA765DF0001ED2E /* KeyboardImagePickerOptions.m */; };
+		0E9A73471BA765DF0001ED2E /* DemoImagePickerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A73461BA765DF0001ED2E /* DemoImagePickerOptions.m */; };
 		271B312E58EC8D6C3B78939B /* Pods_KCKeyboardImagePicker_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0DE05754720268B611E3361 /* Pods_KCKeyboardImagePicker_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
@@ -40,15 +41,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0E8E46B71B9C3A4C00DCDF68 /* DemoButtonSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoButtonSettingsViewController.h; sourceTree = "<group>"; };
-		0E8E46B81B9C3A4C00DCDF68 /* DemoButtonSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoButtonSettingsViewController.m; sourceTree = "<group>"; };
+		0E1A08901BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoImagePickerControllerButtonSettingsViewController.h; sourceTree = "<group>"; };
+		0E1A08911BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoImagePickerControllerButtonSettingsViewController.m; sourceTree = "<group>"; };
+		0E8E46B71B9C3A4C00DCDF68 /* DemoOptionButtonSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoOptionButtonSettingsViewController.h; sourceTree = "<group>"; };
+		0E8E46B81B9C3A4C00DCDF68 /* DemoOptionButtonSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoOptionButtonSettingsViewController.m; sourceTree = "<group>"; };
 		0E8E46BA1B9D11CB00DCDF68 /* LaunchScreen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LaunchScreen.xib; sourceTree = "<group>"; };
 		0E8E46BC1B9D15C400DCDF68 /* DemoColorSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoColorSettingsViewController.h; sourceTree = "<group>"; };
 		0E8E46BD1B9D15C400DCDF68 /* DemoColorSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoColorSettingsViewController.m; sourceTree = "<group>"; };
 		0E8E46BF1B9D4BBA00DCDF68 /* DemoMessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoMessagesViewController.h; sourceTree = "<group>"; };
 		0E8E46C01B9D4BBA00DCDF68 /* DemoMessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoMessagesViewController.m; sourceTree = "<group>"; };
-		0E9A73451BA765DF0001ED2E /* KeyboardImagePickerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KeyboardImagePickerOptions.h; sourceTree = "<group>"; };
-		0E9A73461BA765DF0001ED2E /* KeyboardImagePickerOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KeyboardImagePickerOptions.m; sourceTree = "<group>"; };
+		0E9A73451BA765DF0001ED2E /* DemoImagePickerOptions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoImagePickerOptions.h; sourceTree = "<group>"; };
+		0E9A73461BA765DF0001ED2E /* DemoImagePickerOptions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoImagePickerOptions.m; sourceTree = "<group>"; };
 		28C5F0F9C50B5CB3D99A50AA /* Pods_KCKeyboardImagePicker_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KCKeyboardImagePicker_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5014430ED92169A6B30A75CE /* Pods-KCKeyboardImagePicker_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KCKeyboardImagePicker_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-KCKeyboardImagePicker_Example/Pods-KCKeyboardImagePicker_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		6003F58A195388D20070C39A /* KCKeyboardImagePicker_Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KCKeyboardImagePicker_Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -105,6 +108,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0E2DAD611BB77A8F00252FC9 /* DemoSettingsControllers */ = {
+			isa = PBXGroup;
+			children = (
+				0E8E46BC1B9D15C400DCDF68 /* DemoColorSettingsViewController.h */,
+				0E8E46BD1B9D15C400DCDF68 /* DemoColorSettingsViewController.m */,
+				0E1A08901BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.h */,
+				0E1A08911BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.m */,
+				0E8E46B71B9C3A4C00DCDF68 /* DemoOptionButtonSettingsViewController.h */,
+				0E8E46B81B9C3A4C00DCDF68 /* DemoOptionButtonSettingsViewController.m */,
+				6003F5A5195388D20070C39A /* DemoSettingsViewController.h */,
+				6003F5A6195388D20070C39A /* DemoSettingsViewController.m */,
+			);
+			name = DemoSettingsControllers;
+			sourceTree = "<group>";
+		};
 		43041C64431985D963B8FAB3 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,16 +173,11 @@
 			children = (
 				6003F59C195388D20070C39A /* AppDelegate.h */,
 				6003F59D195388D20070C39A /* AppDelegate.m */,
-				0E8E46B71B9C3A4C00DCDF68 /* DemoButtonSettingsViewController.h */,
-				0E8E46B81B9C3A4C00DCDF68 /* DemoButtonSettingsViewController.m */,
-				0E8E46BC1B9D15C400DCDF68 /* DemoColorSettingsViewController.h */,
-				0E8E46BD1B9D15C400DCDF68 /* DemoColorSettingsViewController.m */,
+				0E9A73451BA765DF0001ED2E /* DemoImagePickerOptions.h */,
+				0E9A73461BA765DF0001ED2E /* DemoImagePickerOptions.m */,
 				0E8E46BF1B9D4BBA00DCDF68 /* DemoMessagesViewController.h */,
 				0E8E46C01B9D4BBA00DCDF68 /* DemoMessagesViewController.m */,
-				6003F5A5195388D20070C39A /* DemoSettingsViewController.h */,
-				6003F5A6195388D20070C39A /* DemoSettingsViewController.m */,
-				0E9A73451BA765DF0001ED2E /* KeyboardImagePickerOptions.h */,
-				0E9A73461BA765DF0001ED2E /* KeyboardImagePickerOptions.m */,
+				0E2DAD611BB77A8F00252FC9 /* DemoSettingsControllers */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				0E8E46BA1B9D11CB00DCDF68 /* LaunchScreen.xib */,
 				6003F594195388D20070C39A /* Supporting Files */,
@@ -410,10 +423,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0E1A08921BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.m in Sources */,
 				6003F59E195388D20070C39A /* AppDelegate.m in Sources */,
 				6003F5A7195388D20070C39A /* DemoSettingsViewController.m in Sources */,
-				0E8E46B91B9C3A4C00DCDF68 /* DemoButtonSettingsViewController.m in Sources */,
-				0E9A73471BA765DF0001ED2E /* KeyboardImagePickerOptions.m in Sources */,
+				0E8E46B91B9C3A4C00DCDF68 /* DemoOptionButtonSettingsViewController.m in Sources */,
+				0E9A73471BA765DF0001ED2E /* DemoImagePickerOptions.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				0E8E46BE1B9D15C400DCDF68 /* DemoColorSettingsViewController.m in Sources */,
 				0E8E46C51B9D4BBA00DCDF68 /* DemoMessagesViewController.m in Sources */,

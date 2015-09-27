@@ -6,15 +6,15 @@
 //  Copyright (c) 2015 Kev1nChen. All rights reserved.
 //
 
-#import "KeyboardImagePickerOptions.h"
+#import "DemoImagePickerOptions.h"
 
-@implementation KeyboardImagePickerOptions
+@implementation DemoImagePickerOptions
 
 - (id)init {
     if (self = [super init]) {
         self.backgroundColor = [UIColor lightGrayColor];
         
-        self.imagePickerControllerButtonIsVisible = YES;
+        self.isImagePickerControllerButtonVisible = YES;
         self.imagePickerControllerButtonAlpha = 0.8;
         self.imagePickerControllerButtonSize = 50;
         self.imagePickerControllerButtonColor = [UIColor lightGrayColor];
@@ -23,8 +23,7 @@
         self.optionButtonsAlpha = 0.8;
         self.optionButtonTitles = @[@"Send"];
         self.optionButtonColors = @[[UIColor colorWithRed:0 green:0 blue:0 alpha:0.2]];
-        self.optionButtonTitleNormalColors = @[[UIColor whiteColor]];
-        self.optionButtonTitleHighlightedColors = @[[UIColor whiteColor]];
+        self.optionButtonTitleColors = @[[UIColor whiteColor]];
     }
     return self;
 }

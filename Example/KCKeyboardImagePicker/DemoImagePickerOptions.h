@@ -8,11 +8,11 @@
 
 #import <Foundation/Foundation.h>
 
-@interface KeyboardImagePickerOptions : NSObject
+@interface DemoImagePickerOptions : NSObject
 
 @property (nonatomic, strong) UIColor *backgroundColor;
 
-@property (nonatomic, assign) BOOL imagePickerControllerButtonIsVisible;
+@property (nonatomic, assign) BOOL isImagePickerControllerButtonVisible;
 @property (nonatomic, assign) CGFloat imagePickerControllerButtonAlpha;
 @property (nonatomic, assign) CGFloat imagePickerControllerButtonSize;
 @property (nonatomic, strong) UIColor *imagePickerControllerButtonColor;
@@ -21,8 +21,7 @@
 @property (nonatomic, assign) CGFloat optionButtonsAlpha;
 @property (nonatomic, strong) NSArray *optionButtonTitles;
 @property (nonatomic, strong) NSArray *optionButtonColors;
-@property (nonatomic, strong) NSArray *optionButtonTitleNormalColors;
-@property (nonatomic, strong) NSArray *optionButtonTitleHighlightedColors;
+@property (nonatomic, strong) NSArray *optionButtonTitleColors;
 
 @end
 

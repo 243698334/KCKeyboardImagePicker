@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 Kev1nChen. All rights reserved.
 //
 
-#import "DemoButtonSettingsViewController.h"
+#import "DemoOptionButtonSettingsViewController.h"
 
-@interface DemoButtonSettingsViewController ()
+@interface DemoOptionButtonSettingsViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
 
 @property (nonatomic) NSInteger buttonIndex;
-@property (nonatomic, strong) KeyboardImagePickerOptions *imagePickerOptions;
+@property (nonatomic, strong) DemoImagePickerOptions *imagePickerOptions;
 
 @end
 
@@ -22,18 +22,16 @@ NSInteger const kButtonTitleSectionIndex = 1;
 NSInteger const kButtonDeleteSectionIndex = 2;
 
 NSInteger const kButtonColorsSectionColorIndex = 0;
-NSInteger const kButtonColorsSectionTitleNormalColorIndex = 1;
-NSInteger const kButtonColorsSectionTitleHighlightedColorIndex = 2;
+NSInteger const kButtonColorsSectionTitleColorIndex = 1;
 
 NSInteger const kButtonColorsSectionColorTag = 0;
-NSInteger const kButtonColorsSectionTitleNormalColorTag = 1;
-NSInteger const kButtonColorsSectionTitleHighlightedColorTag = 2;
+NSInteger const kButtonColorsSectionTitleColorTag = 1;
 
 NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
 
-@implementation DemoButtonSettingsViewController
+@implementation DemoOptionButtonSettingsViewController
 
-- (id)initWithButtonIndex:(NSInteger)buttonIndex imagePickerOptions:(KeyboardImagePickerOptions *)imagePickerOptions {
+- (id)initWithButtonIndex:(NSInteger)buttonIndex imagePickerOptions:(DemoImagePickerOptions *)imagePickerOptions {
     if (self = [super init]) {
         self.buttonIndex = buttonIndex;
         self.imagePickerOptions = imagePickerOptions;
@@ -60,12 +58,9 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
     NSMutableArray *colors = [self.imagePickerOptions.optionButtonColors mutableCopy];
     [colors removeObjectAtIndex:self.buttonIndex];
     self.imagePickerOptions.optionButtonColors = [NSArray arrayWithArray:colors];
-    NSMutableArray *titleNormalColors = [self.imagePickerOptions.optionButtonTitleNormalColors mutableCopy];
-    [titleNormalColors removeObjectAtIndex:self.buttonIndex];
-    self.imagePickerOptions.optionButtonTitleNormalColors = [NSArray arrayWithArray:titleNormalColors];
-    NSMutableArray *titleHighlightedColors = [self.imagePickerOptions.optionButtonTitleHighlightedColors mutableCopy];
-    [titleHighlightedColors removeObjectAtIndex:self.buttonIndex];
-    self.imagePickerOptions.optionButtonTitleHighlightedColors = [NSArray arrayWithArray:titleHighlightedColors];
+    NSMutableArray *titleColors = [self.imagePickerOptions.optionButtonTitleColors mutableCopy];
+    [titleColors removeObjectAtIndex:self.buttonIndex];
+    self.imagePickerOptions.optionButtonTitleColors = [NSArray arrayWithArray:titleColors];
 }
 
 #pragma mark - UITableViewDataSource
@@ -77,7 +72,7 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case kButtonColorsSectionIndex:
-            return 3;
+            return 2;
         case kButtonTitleSectionIndex:
             return 1;
         case kButtonDeleteSectionIndex:
@@ -111,15 +106,11 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
             switch (indexPath.row) {
                 case kButtonColorsSectionColorIndex:
                     [self.imagePickerOptions.optionButtonColors[self.buttonIndex] getRed:&redValue green:&greenValue blue:&blueValue alpha:&alphaValue];
-                    tableViewCell.textLabel.text = @"Button";
+                    tableViewCell.textLabel.text = @"Background";
                     break;
-                case kButtonColorsSectionTitleNormalColorIndex:
-                    [self.imagePickerOptions.optionButtonTitleNormalColors[self.buttonIndex] getRed:&redValue green:&greenValue blue:&blueValue alpha:&alphaValue];
-                    tableViewCell.textLabel.text = @"Normal Title";
-                    break;
-                case kButtonColorsSectionTitleHighlightedColorIndex:
-                    [self.imagePickerOptions.optionButtonTitleHighlightedColors[self.buttonIndex] getRed:&redValue green:&greenValue blue:&blueValue alpha:&alphaValue];
-                    tableViewCell.textLabel.text = @"Highlighted Title";
+                case kButtonColorsSectionTitleColorIndex:
+                    [self.imagePickerOptions.optionButtonTitleColors[self.buttonIndex] getRed:&redValue green:&greenValue blue:&blueValue alpha:&alphaValue];
+                    tableViewCell.textLabel.text = @"Title";
                     break;
             }
             tableViewCell.detailTextLabel.text = [NSString stringWithFormat:@"R:%ld G:%ld B:%ld A:%ld", (NSInteger)(redValue * 255), (NSInteger)(greenValue * 255), (NSInteger)(blueValue * 255), (NSInteger)(alphaValue * 100)];
@@ -151,11 +142,8 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
                 case kButtonColorsSectionColorIndex:
                     demoColorSettingsViewController = [[DemoColorSettingsViewController alloc] initWithColor:self.imagePickerOptions.optionButtonColors[self.buttonIndex] tag:kButtonColorsSectionColorTag];
                     break;
-                case kButtonColorsSectionTitleNormalColorIndex:
-                    demoColorSettingsViewController = [[DemoColorSettingsViewController alloc] initWithColor:self.imagePickerOptions.optionButtonTitleNormalColors[self.buttonIndex] tag:kButtonColorsSectionTitleNormalColorTag];
-                    break;
-                case kButtonColorsSectionTitleHighlightedColorIndex:
-                    demoColorSettingsViewController = [[DemoColorSettingsViewController alloc] initWithColor:self.imagePickerOptions.optionButtonTitleHighlightedColors[self.buttonIndex] tag:kButtonColorsSectionTitleHighlightedColorTag];
+                case kButtonColorsSectionTitleColorIndex:
+                    demoColorSettingsViewController = [[DemoColorSettingsViewController alloc] initWithColor:self.imagePickerOptions.optionButtonTitleColors[self.buttonIndex] tag:kButtonColorsSectionTitleColorTag];
                     break;
             }
             demoColorSettingsViewController.delegate = self;
@@ -202,17 +190,11 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
             [modifiedColors replaceObjectAtIndex:self.buttonIndex withObject:color];
             self.imagePickerOptions.optionButtonColors = [NSArray arrayWithArray:modifiedColors];
             break;
-        case kButtonColorsSectionTitleNormalColorTag:
-            originalColors = self.imagePickerOptions.optionButtonTitleNormalColors;
+        case kButtonColorsSectionTitleColorTag:
+            originalColors = self.imagePickerOptions.optionButtonTitleColors;
             modifiedColors = [originalColors mutableCopy];
             [modifiedColors replaceObjectAtIndex:self.buttonIndex withObject:color];
-            self.imagePickerOptions.optionButtonTitleNormalColors = [NSArray arrayWithArray:modifiedColors];
-            break;
-        case kButtonColorsSectionTitleHighlightedColorTag:
-            originalColors = self.imagePickerOptions.optionButtonTitleHighlightedColors;
-            modifiedColors = [originalColors mutableCopy];
-            [modifiedColors replaceObjectAtIndex:self.buttonIndex withObject:color];
-            self.imagePickerOptions.optionButtonTitleHighlightedColors = [NSArray arrayWithArray:modifiedColors];
+            self.imagePickerOptions.optionButtonTitleColors = [NSArray arrayWithArray:modifiedColors];
             break;
     }
     [self.tableView reloadData];

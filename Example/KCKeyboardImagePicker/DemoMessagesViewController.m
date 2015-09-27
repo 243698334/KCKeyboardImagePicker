@@ -131,11 +131,11 @@
         }]];
         
         // Add a style for the option button
-        [self.keyboardImagePickerController addStyle:[KCKeyboardImagePickerStyle styleWithOptionButtonTag:i titleColor:self.imagePickerOptions.optionButtonTitleNormalColors[i] backgroundColor:self.imagePickerOptions.optionButtonColors[i]]];
+        [self.keyboardImagePickerController addStyle:[KCKeyboardImagePickerStyle styleWithOptionButtonTag:i titleColor:self.imagePickerOptions.optionButtonTitleColors[i] backgroundColor:self.imagePickerOptions.optionButtonColors[i]]];
     }
     
     // image picker controller button
-    if (self.imagePickerOptions.imagePickerControllerButtonIsVisible) {
+    if (self.imagePickerOptions.isImagePickerControllerButtonVisible) {
         // Add an action for the image picker controller button
         [self.keyboardImagePickerController addAction:[KCKeyboardImagePickerAction actionWithImagePickerControllerButtonParentViewController:self handler:^(UIImage *selectedImage) {
             JSQPhotoMediaItem *photoMediaItem = [[JSQPhotoMediaItem alloc] initWithImage:selectedImage];

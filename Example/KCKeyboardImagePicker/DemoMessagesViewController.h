@@ -8,10 +8,10 @@
 
 #import <JSQMessagesViewController/JSQMessages.h>
 
-#import "KeyboardImagePickerOptions.h"
+#import "DemoImagePickerOptions.h"
 
 @interface DemoMessagesViewController : JSQMessagesViewController
 
-@property (nonatomic, strong) KeyboardImagePickerOptions *imagePickerOptions;
+@property (nonatomic, strong) DemoImagePickerOptions *imagePickerOptions;
 
 @end

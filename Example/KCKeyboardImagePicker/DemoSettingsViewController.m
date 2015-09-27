@@ -9,31 +9,28 @@
 #import "DemoSettingsViewController.h"
 
 #import <KCKeyboardImagePicker/KCKeyboardImagePickerView.h>
-#import "DemoButtonSettingsViewController.h"
+#import "DemoOptionButtonSettingsViewController.h"
+#import "DemoImagePickerControllerButtonSettingsViewController.h"
 #import "DemoMessagesViewController.h"
 
 @interface DemoSettingsViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) DemoMessagesViewController *demoMessagesViewController;
-@property (nonatomic, strong) KeyboardImagePickerOptions *imagePickerOptions;
+@property (nonatomic, strong) DemoImagePickerOptions *imagePickerOptions;
 
 @end
 
 NSInteger const kShowDemoSectionIndex = 0;
-NSInteger const kAppearenceSectionIndex = 1;
+NSInteger const kImagePickerControllerButtonSectionIndex = 1;
 NSInteger const kOptionButtonsSectionIndex = 2;
 
-NSInteger const kAppearenceSectionOptionButtonAlphaIndex = 0;
-NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaIndex = 1;
-NSInteger const kAppearenceSectionImagePickerControllerButtonColorIndex = 2;
-
 NSString * const kShowDemoSectionCellIdentifier = @"ShowDemoSectionCellIdentifier";
-NSString * const kAppearenceSectionCellIdentifier = @"AppearenceSectionCellIdentifier";
+NSString * const kImagePickerControllerButtonSectionCellIdentifier = @"ImagePickerControllerButtonSectionCellIdentifier";
 NSString * const kOptionButtonsSectionCellIdentifier = @"OptionButtonsSectionCellIdentifier";
 
-NSInteger const kAppearenceSectionOptionButtonAlphaAlertViewTag = 0;
-NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag = 1;
+NSInteger const kImagePickerControllerButtonSectionOptionButtonAlphaAlertViewTag = 0;
+NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAlphaAlertViewTag = 1;
 
 
 @implementation DemoSettingsViewController
@@ -43,7 +40,7 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
     
     self.navigationItem.title = @"Demo Settings";
     
-    self.imagePickerOptions = [[KeyboardImagePickerOptions alloc] init];
+    self.imagePickerOptions = [[DemoImagePickerOptions alloc] init];
     
     self.tableView = [[UITableView alloc] initWithFrame:self.view.frame style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
@@ -68,29 +65,12 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    UIAlertView *alertView = nil;
-    DemoButtonSettingsViewController *demoButtonSettingsViewController = nil;
     switch (indexPath.section) {
         case kShowDemoSectionIndex:
             [self showDemo];
             break;
-        case kAppearenceSectionIndex:
-            switch (indexPath.row) {
-                case kAppearenceSectionOptionButtonAlphaIndex:
-                    alertView = [[UIAlertView alloc] initWithTitle:@"Option Buttons Alpha" message:@"The alpha percentage for all option buttons." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-                    alertView.tag = kAppearenceSectionOptionButtonAlphaAlertViewTag;
-                    break;
-                case kAppearenceSectionImagePickerControllerButtonAlphaIndex:
-                    alertView = [[UIAlertView alloc] initWithTitle:@"Image Picker Controller Button Alpha" message:@"The alpha percentage for the Image Picker Controller Button." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
-                    alertView.tag = kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag;
-                    break;
-                default:
-                    break;
-            }
-            alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-            [[alertView textFieldAtIndex:0] becomeFirstResponder];
-            [[alertView textFieldAtIndex:0] setKeyboardType:UIKeyboardTypeNumberPad];
-            [alertView show];
+        case kImagePickerControllerButtonSectionIndex:
+            [self.navigationController pushViewController:[[DemoImagePickerControllerButtonSettingsViewController alloc] initWithImagePickerOptions:self.imagePickerOptions] animated:YES];
             break;
         case kOptionButtonsSectionIndex:
             if (indexPath.row == [self.imagePickerOptions.optionButtonTitles count]) {
@@ -100,15 +80,11 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
                 NSMutableArray *colors = [self.imagePickerOptions.optionButtonColors mutableCopy];
                 [colors addObject:[UIColor whiteColor]];
                 self.imagePickerOptions.optionButtonColors = [NSArray arrayWithArray:colors];
-                NSMutableArray *titleNormalColors = [self.imagePickerOptions.optionButtonTitleNormalColors mutableCopy];
+                NSMutableArray *titleNormalColors = [self.imagePickerOptions.optionButtonTitleColors mutableCopy];
                 [titleNormalColors addObject:[UIColor blackColor]];
-                self.imagePickerOptions.optionButtonTitleNormalColors = [NSArray arrayWithArray:titleNormalColors];
-                NSMutableArray *titleHighlightedColors = [self.imagePickerOptions.optionButtonTitleHighlightedColors mutableCopy];
-                [titleHighlightedColors addObject:[UIColor lightGrayColor]];
-                self.imagePickerOptions.optionButtonTitleHighlightedColors = [NSArray arrayWithArray:titleHighlightedColors];
+                self.imagePickerOptions.optionButtonTitleColors = [NSArray arrayWithArray:titleNormalColors];
             }
-            demoButtonSettingsViewController = [[DemoButtonSettingsViewController alloc] initWithButtonIndex:indexPath.row imagePickerOptions:self.imagePickerOptions];
-            [self.navigationController pushViewController:demoButtonSettingsViewController animated:YES];
+            [self.navigationController pushViewController:[[DemoOptionButtonSettingsViewController alloc] initWithButtonIndex:indexPath.row imagePickerOptions:self.imagePickerOptions] animated:YES];
             break;
     }
 }
@@ -123,8 +99,8 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
     switch (section) {
         case kShowDemoSectionIndex:
             return 1;
-        case kAppearenceSectionIndex:
-            return 2;
+        case kImagePickerControllerButtonSectionIndex:
+            return 1;
         case kOptionButtonsSectionIndex:
             return [self.imagePickerOptions.optionButtonTitles count] == 4 ? 4 : [self.imagePickerOptions.optionButtonTitles count] + 1;
         default:
@@ -136,8 +112,8 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
     switch (section) {
         case kShowDemoSectionIndex:
             return nil;
-        case kAppearenceSectionIndex:
-            return @"General Appearence";
+        case kImagePickerControllerButtonSectionIndex:
+            return @"Image Picker Controller Button";
         case kOptionButtonsSectionIndex:
             return @"Option Buttons";
         default:
@@ -149,7 +125,7 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
     switch (section) {
         case kShowDemoSectionIndex:
             return nil;
-        case kAppearenceSectionIndex:
+        case kImagePickerControllerButtonSectionIndex:
             return @"Image Picker Controller Button is the one floating on top of the Keyboard  Image Picker View that brings up the default UIImagePickerController.";
         case kOptionButtonsSectionIndex:
             return @"Option Buttons are the ones that become visible when the user taps on an image. There can be up to 4 option buttons.";
@@ -170,23 +146,12 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
                 tableViewCell.accessoryType = UITableViewCellAccessoryNone;
             }
             break;
-        case kAppearenceSectionIndex:
-            tableViewCell = [tableView dequeueReusableCellWithIdentifier:kAppearenceSectionCellIdentifier];
+        case kImagePickerControllerButtonSectionIndex:
+            tableViewCell = [tableView dequeueReusableCellWithIdentifier:kImagePickerControllerButtonSectionCellIdentifier];
             if (tableViewCell == nil) {
-                tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kAppearenceSectionCellIdentifier];
+                tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kImagePickerControllerButtonSectionCellIdentifier];
+                tableViewCell.textLabel.text = @"Button";
                 tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            }
-            switch (indexPath.row) {
-                case kAppearenceSectionOptionButtonAlphaIndex:
-                    tableViewCell.textLabel.text = @"Option Buttons Alpha";
-                    tableViewCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld%%", (NSInteger)(self.imagePickerOptions.optionButtonsAlpha * 100)];
-                    break;
-                case kAppearenceSectionImagePickerControllerButtonAlphaIndex:
-                    tableViewCell.textLabel.text = @"ImagePickerController Button Alpha";
-                    tableViewCell.detailTextLabel.text = [NSString stringWithFormat:@"%ld%%", (NSInteger)(self.imagePickerOptions.imagePickerControllerButtonAlpha * 100)];
-                    break;
-                default:
-                    break;
             }
             break;
         case kOptionButtonsSectionIndex:
@@ -219,10 +184,10 @@ NSInteger const kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag =
         return;
     }
     switch (alertView.tag) {
-        case kAppearenceSectionOptionButtonAlphaAlertViewTag:
+        case kImagePickerControllerButtonSectionOptionButtonAlphaAlertViewTag:
             self.imagePickerOptions.optionButtonsAlpha = alphaPercentage / 100.0;
             break;
-        case kAppearenceSectionImagePickerControllerButtonAlphaAlertViewTag:
+        case kImagePickerControllerButtonSectionImagePickerControllerButtonAlphaAlertViewTag:
             self.imagePickerOptions.imagePickerControllerButtonAlpha = alphaPercentage / 100.0;
             break;
     }
