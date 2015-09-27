@@ -1,5 +1,5 @@
 //
-//  KCViewController.h
+//  DemoSettingsViewController.h
 //  KCKeyboardImagePicker
 //
 //  Created by Kev1nChen on 09/05/2015.

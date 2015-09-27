@@ -1,5 +1,5 @@
 //
-//  KeyboardImagePickerOptions.h
+//  DemoImagePickerOptions.h
 //  KCKeyboardImagePicker
 //
 //  Created by Kevin Yufei Chen on 9/14/15.

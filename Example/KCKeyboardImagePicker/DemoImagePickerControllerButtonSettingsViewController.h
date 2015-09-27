@@ -1,5 +1,5 @@
 //
-//  DemoButtonSettingsViewController.h
+//  DemoImagePickerControllerButtonSettingsViewController.h
 //  KCKeyboardImagePicker
 //
 //  Created by Kevin Yufei Chen on 9/6/15.
