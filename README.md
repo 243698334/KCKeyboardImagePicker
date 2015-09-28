@@ -34,7 +34,7 @@ Set a frame (usually the frame of the keyboard) to the `KCKeyboardImagePickerCon
 ````objective-c
 self.keyboardImagePickerController = [[KCKeyboardImagePickerController alloc] init];
 self.keyboardImagePickerController.keyboardFrame = self.keyboardController.currentKeyboardFrame;
-[self.keyboardController.contextView addSubview:self.keyboardImagePickerController.imagePickerView];
+[self.someContainerView addSubview:self.keyboardImagePickerController.imagePickerView];
 ````
 
 - Actions
