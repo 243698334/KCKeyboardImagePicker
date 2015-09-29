@@ -54,7 +54,7 @@ CGFloat const kKCKeyboardImagePickerViewCellOptionButtonBorderWidth = 2.0;
         
         UICollectionViewFlowLayout *flowLayout = [[UICollectionViewFlowLayout alloc] init];
         flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
-        flowLayout.minimumInteritemSpacing = 2.0;
+        flowLayout.minimumLineSpacing = 3;
         self.imagesCollectionView = [[UICollectionView alloc] initWithFrame:CGRectZero collectionViewLayout:flowLayout];
         self.imagesCollectionView.delegate = self;
         self.imagesCollectionView.dataSource = self;
