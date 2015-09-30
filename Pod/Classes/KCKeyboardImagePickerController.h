@@ -53,10 +53,11 @@
  match the style of the option button.
  @param title A string as the title of the action, which will displayed on the
  corresponding option button.
+ @param enabled A boolean indicating if 3D touch should be enabled for this action.
  @param handler A block to execute when the user taps on the corresponding option 
  button of this action.
  */
-+ (instancetype)actionWithOptionButtonTag:(NSInteger)tag title:(NSString *)title handler:(void (^) (UIImage *selectedImage))handler;
++ (instancetype)actionWithOptionButtonTag:(NSInteger)tag title:(NSString *)title forceTouchEnabled:(BOOL)enabled handler:(void (^) (UIImage *selectedImage))handler;
 
 @end
 
@@ -86,7 +87,7 @@
 
 @end
 
-@interface KCKeyboardImagePickerController : NSObject
+@interface KCKeyboardImagePickerController : UIViewController
 
 /**
  @abstract The keyboard image picker view instance.

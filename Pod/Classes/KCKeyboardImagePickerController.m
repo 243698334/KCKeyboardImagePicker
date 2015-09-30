@@ -30,11 +30,13 @@
 
 #import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import "KCKeyboardImagePickerPreviewViewController.h"
 
 @interface KCKeyboardImagePickerAction ()
 
 @property (nonatomic, assign) NSInteger tag;
 @property (nonatomic, assign) NSString *title;
+@property (nonatomic, assign) BOOL forceTouchEnabled;
 @property (nonatomic, assign) UIViewController *parentViewController;
 @property (nonatomic, assign) void (^ handler)(UIImage *selectedImage);
 
@@ -51,10 +53,11 @@
     return action;
 }
 
-+ (instancetype)actionWithOptionButtonTag:(NSInteger)tag title:(NSString *)title handler:(void (^) (UIImage *selectedImage))handler {
++ (instancetype)actionWithOptionButtonTag:(NSInteger)tag title:(NSString *)title forceTouchEnabled:(BOOL)enabled handler:(void (^) (UIImage *selectedImage))handler {
     KCKeyboardImagePickerAction *action = [[KCKeyboardImagePickerAction alloc] init];
     action.tag = tag;
     action.title = title;
+    action.forceTouchEnabled = enabled;
     action.parentViewController = nil;
     action.handler = handler;
     return action;
@@ -93,11 +96,13 @@
 
 @end
 
-@interface KCKeyboardImagePickerController () <KCKeyboardImagePickerViewDataSource, KCKeyboardImagePickerViewDelegate, UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface KCKeyboardImagePickerController () <KCKeyboardImagePickerViewDataSource, KCKeyboardImagePickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIViewControllerPreviewingDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *handlers;
 @property (nonatomic, strong) NSMutableDictionary *images;
 @property (nonatomic, strong) NSMutableDictionary *titles;
+@property (nonatomic, strong) NSMutableDictionary *forceTouchEnabledFlags;
+
 @property (nonatomic, strong) NSMutableDictionary *titleColors;
 @property (nonatomic, strong) NSMutableDictionary *backgroundColors;
 @property (nonatomic, strong) NSMutableDictionary *optionButtonIndices;
@@ -121,12 +126,13 @@
         self.imagePickerView.dataSource = self;
         self.imagePickerView.delegate = self;
         
-        self.titles = [[NSMutableDictionary alloc] initWithCapacity:5];
-        self.handlers = [[NSMutableDictionary alloc] initWithCapacity:5];
-        self.images = [[NSMutableDictionary alloc] initWithCapacity:5];
-        self.titleColors = [[NSMutableDictionary alloc] initWithCapacity:5];
-        self.backgroundColors = [[NSMutableDictionary alloc] initWithCapacity:5];
-        self.optionButtonIndices = [[NSMutableDictionary alloc] initWithCapacity:4];
+        self.titles = [[NSMutableDictionary alloc] init];
+        self.forceTouchEnabledFlags = [[NSMutableDictionary alloc] init];
+        self.handlers = [[NSMutableDictionary alloc] init];
+        self.images = [[NSMutableDictionary alloc] init];
+        self.titleColors = [[NSMutableDictionary alloc] init];
+        self.backgroundColors = [[NSMutableDictionary alloc] init];
+        self.optionButtonIndices = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
@@ -134,6 +140,7 @@
 - (void)addAction:(KCKeyboardImagePickerAction *)action {
     if (action.tag != -1) {
         [self.titles setObject:action.title forKey:[NSNumber numberWithInteger:action.tag]];
+        [self.forceTouchEnabledFlags setObject:[NSNumber numberWithBool:action.forceTouchEnabled] forKeyedSubscript:[NSNumber numberWithInteger:action.tag]];
         [self.optionButtonIndices setObject:[NSNumber numberWithInteger:action.tag] forKey:[NSNumber numberWithInteger:[self.optionButtonIndices count]]];
     } else {
         self.parentViewController = action.parentViewController;
@@ -161,6 +168,7 @@
     } else {
         self.imagePickerView.frame = self.keyboardFrame;
     }
+    [self setupForceTouch];
 }
 
 - (void)hideKeyboardImagePickerViewAnimated:(BOOL)animated {
@@ -178,6 +186,48 @@
         self.imagePickerView.frame = imagePickerViewFrame;
         self.imagePickerView.hidden = YES;
     }
+}
+
+- (void)imageForPreviewAtIndex:(NSInteger)index handler:(void (^) (UIImage *image))handler {
+    PHImageRequestOptions *imageRequestOptions = [[PHImageRequestOptions alloc] init];
+    imageRequestOptions.resizeMode = PHImageRequestOptionsResizeModeNone;
+    PHAsset *currentAsset = [self.photoLibraryFetchResult objectAtIndex:index];
+    [[PHImageManager defaultManager] requestImageForAsset:currentAsset targetSize:PHImageManagerMaximumSize contentMode:PHImageContentModeAspectFit options:imageRequestOptions resultHandler:^(UIImage * _Nullable result, NSDictionary * _Nullable info) {
+        if ([[info objectForKey:PHImageResultIsDegradedKey] isEqual:[NSNumber numberWithInt:0]]) {
+            handler(result);
+        }
+    }];
+}
+
+- (void)setupForceTouch {
+    if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+        [self registerForPreviewingWithDelegate:self sourceView:self.imagePickerView];
+    }
+}
+
+- (UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location {
+    NSInteger previewingImageIndex = [self.imagePickerView imageIndexAtPoint:location];
+    
+    KCKeyboardImagePickerPreviewViewController *previewViewController = [[KCKeyboardImagePickerPreviewViewController alloc] init];
+    for (NSNumber *currentActionIndex in [self.optionButtonIndices allKeys]) {
+        NSNumber *currentActionTag = [self.optionButtonIndices objectForKey:currentActionIndex];
+        UIPreviewAction *currentPreviewAction = [UIPreviewAction actionWithTitle:[self.titles objectForKey:currentActionTag] style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+            [self imageForPreviewAtIndex:previewingImageIndex handler:^(UIImage *image) {
+                void (^ handler)(UIImage *selectedImage) = [self.handlers objectForKey:currentActionTag];
+                handler(image);
+            }];
+        }];
+        [previewViewController addPreviewAction:currentPreviewAction];
+    }
+    
+    [self imageForPreviewAtIndex:previewingImageIndex handler:^(UIImage *image) {
+        [(KCKeyboardImagePickerPreviewViewController *)previewViewController updateImage:image];
+    }];
+    return previewViewController;
+}
+
+- (void)previewingContext:(id<UIViewControllerPreviewing>)previewingContext commitViewController:(UIViewController *)viewControllerToCommit {
+    
 }
 
 # pragma mark - KCKeyboardImagePickerViewDataSource

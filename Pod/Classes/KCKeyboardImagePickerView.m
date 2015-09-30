@@ -31,7 +31,7 @@
 CGFloat const kKCKeyboardImagePickerViewCellOptionButtonRadius = 60.0;
 CGFloat const kKCKeyboardImagePickerViewCellOptionButtonBorderWidth = 2.0;
 
-@interface KCKeyboardImagePickerView () <UICollectionViewDataSource, UICollectionViewDelegate>
+@interface KCKeyboardImagePickerView () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @property (nonatomic, strong) UICollectionView *imagesCollectionView;
 @property (nonatomic, strong) UIButton *imagePickerControllerButton;
@@ -102,6 +102,13 @@ CGFloat const kKCKeyboardImagePickerViewCellOptionButtonBorderWidth = 2.0;
         imageView.alpha = 1.0;
         cell.backgroundView = nil;
     }
+}
+
+- (NSInteger)imageIndexAtPoint:(CGPoint)point {
+    CGFloat offsetX = self.imagesCollectionView.contentOffset.x;
+    CGFloat offsetY = self.imagesCollectionView.contentOffset.y;
+    CGPoint pointInCollectionView = CGPointMake(point.x + offsetX, point.y + offsetY);
+    return [self.imagesCollectionView indexPathForItemAtPoint:pointInCollectionView].item;
 }
 
 - (void)renderImagesCollectionView {

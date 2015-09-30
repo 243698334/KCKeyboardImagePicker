@@ -231,7 +231,7 @@
  Facebook Messenger app. A user can quickly browse and select an image and perform some
  tasks without bringing up a full screen camera roll picker.
  */
-@interface KCKeyboardImagePickerView : UIView<UICollectionViewDelegateFlowLayout>
+@interface KCKeyboardImagePickerView : UIView
 
 /**
  @abstract The object that acts as the delegate of the picker.
@@ -252,5 +252,13 @@
  @param animated A flag indicating if this update should be animated.
  */
 - (void)updateImage:(UIImage *)image atIndex:(NSInteger)index animated:(BOOL)animated;
+
+/**
+ @abstract Calculate the index of the image which includes a given point on the screen.
+ @discussion This method is used by the force touch feature.
+ @param point The location of the touch event.
+ @return index An index locating the image displayed.
+ */
+- (NSInteger)imageIndexAtPoint:(CGPoint)point;
 
 @end

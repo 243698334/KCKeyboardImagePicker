@@ -11,7 +11,7 @@
 #import <Photos/Photos.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <KCKeyboardImagePicker/KCKeyboardImagePickerController.h>
-
+#import <KCKeyboardImagePicker/KCKeyboardImagePickerPreviewViewController.h>
 
 @interface DemoMessagesViewController () <JSQMessagesKeyboardControllerDelegate>
 
@@ -121,7 +121,7 @@
         NSString *currentOptionButtonTitle = [self.imagePickerOptions.optionButtonTitles objectAtIndex:i];
         
         // Add an action for the option button
-        [self.keyboardImagePickerController addAction:[KCKeyboardImagePickerAction actionWithOptionButtonTag:i title:currentOptionButtonTitle handler:^(UIImage *selectedImage) {
+        [self.keyboardImagePickerController addAction:[KCKeyboardImagePickerAction actionWithOptionButtonTag:i title:currentOptionButtonTitle forceTouchEnabled:YES handler:^(UIImage *selectedImage) {
             if ([currentOptionButtonTitle isEqualToString:@"Send"]) {
                 JSQPhotoMediaItem *photoMediaItem = [[JSQPhotoMediaItem alloc] initWithImage:selectedImage];
                 JSQMessage *newImageMessage = [JSQMessage messageWithSenderId:self.senderId displayName:self.senderDisplayName media:photoMediaItem];
