@@ -99,7 +99,9 @@
     if (self.keyboardImagePickerController == nil) {
         self.keyboardImagePickerController = [[KCKeyboardImagePickerController alloc] init];
         [self setupKeyboardImagePickerOptions];
-        [self registerForPreviewingWithDelegate:self.keyboardImagePickerController sourceView:self.keyboardImagePickerController.imagePickerView];
+        if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+            [self registerForPreviewingWithDelegate:self.keyboardImagePickerController sourceView:self.keyboardImagePickerController.imagePickerView];
+        }
     }
     
     self.keyboardImagePickerController.keyboardFrame = self.keyboardController.currentKeyboardFrame;

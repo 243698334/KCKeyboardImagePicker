@@ -203,7 +203,6 @@
 }
 
 - (void)setupForceTouch {
-    [self registerForPreviewingWithDelegate:self sourceView:self.imagePickerView];
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
         [self registerForPreviewingWithDelegate:self sourceView:self.imagePickerView];
     }
