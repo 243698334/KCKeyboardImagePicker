@@ -16,6 +16,8 @@
 @interface DemoSettingsViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UISwitch *forceTouchSwitch;
+
 @property (nonatomic, strong) DemoMessagesViewController *demoMessagesViewController;
 @property (nonatomic, strong) DemoImagePickerOptions *imagePickerOptions;
 
@@ -24,10 +26,12 @@
 NSInteger const kShowDemoSectionIndex = 0;
 NSInteger const kImagePickerControllerButtonSectionIndex = 1;
 NSInteger const kOptionButtonsSectionIndex = 2;
+NSInteger const k3DTouchSectionIndex = 3;
 
 NSString * const kShowDemoSectionCellIdentifier = @"ShowDemoSectionCellIdentifier";
 NSString * const kImagePickerControllerButtonSectionCellIdentifier = @"ImagePickerControllerButtonSectionCellIdentifier";
 NSString * const kOptionButtonsSectionCellIdentifier = @"OptionButtonsSectionCellIdentifier";
+NSString * const k3DTouchSectionCellIdentifier = @"3DTouchSectionCellIdentifier";
 
 NSInteger const kImagePickerControllerButtonSectionOptionButtonAlphaAlertViewTag = 0;
 NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAlphaAlertViewTag = 1;
@@ -74,15 +78,10 @@ NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAl
             break;
         case kOptionButtonsSectionIndex:
             if (indexPath.row == [self.imagePickerOptions.optionButtonTitles count]) {
-                NSMutableArray *titles = [self.imagePickerOptions.optionButtonTitles mutableCopy];
-                [titles addObject:@"New Button"];
-                self.imagePickerOptions.optionButtonTitles = [NSArray arrayWithArray:titles];
-                NSMutableArray *colors = [self.imagePickerOptions.optionButtonColors mutableCopy];
-                [colors addObject:[UIColor whiteColor]];
-                self.imagePickerOptions.optionButtonColors = [NSArray arrayWithArray:colors];
-                NSMutableArray *titleNormalColors = [self.imagePickerOptions.optionButtonTitleColors mutableCopy];
-                [titleNormalColors addObject:[UIColor blackColor]];
-                self.imagePickerOptions.optionButtonTitleColors = [NSArray arrayWithArray:titleNormalColors];
+                [self.imagePickerOptions.optionButtonTitles addObject:@"New"];
+                [self.imagePickerOptions.optionButtonColors addObject:[UIColor whiteColor]];
+                [self.imagePickerOptions.optionButtonTitleColors addObject:[UIColor blackColor]];
+                [self.imagePickerOptions.forceTouchEnabledFlags addObject:[NSNumber numberWithBool:NO]];
             }
             [self.navigationController pushViewController:[[DemoOptionButtonSettingsViewController alloc] initWithButtonIndex:indexPath.row imagePickerOptions:self.imagePickerOptions] animated:YES];
             break;
@@ -92,7 +91,7 @@ NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAl
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -103,6 +102,8 @@ NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAl
             return 1;
         case kOptionButtonsSectionIndex:
             return [self.imagePickerOptions.optionButtonTitles count] == 4 ? 4 : [self.imagePickerOptions.optionButtonTitles count] + 1;
+        case k3DTouchSectionIndex:
+            return 1;
         default:
             return 0;
     }
@@ -116,6 +117,8 @@ NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAl
             return @"Image Picker Controller Button";
         case kOptionButtonsSectionIndex:
             return @"Option Buttons";
+        case k3DTouchSectionIndex:
+            return @"3D Touch";
         default:
             return nil;
     }
@@ -129,6 +132,8 @@ NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAl
             return @"Image Picker Controller Button is the one floating on top of the Keyboard  Image Picker View that brings up the default UIImagePickerController.";
         case kOptionButtonsSectionIndex:
             return @"Option Buttons are the ones that become visible when the user taps on an image. There can be up to 4 option buttons.";
+        case k3DTouchSectionIndex:
+            return @"Force touch on an image to preview and perfrom options.";
         default:
             return nil;
     }
@@ -167,8 +172,25 @@ NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAl
                 tableViewCell.textLabel.text = @"New Button...";
             }
             break;
+        case k3DTouchSectionIndex:
+            tableViewCell = [tableView dequeueReusableCellWithIdentifier:k3DTouchSectionCellIdentifier];
+            if (tableViewCell == nil) {
+                tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:k3DTouchSectionCellIdentifier];
+            }
+            self.forceTouchSwitch = [[UISwitch alloc] init];
+            self.forceTouchSwitch.on = self.imagePickerOptions.isForceTouchEnabled;
+            self.forceTouchSwitch.enabled = NO;
+            tableViewCell.textLabel.text = @"3D Touch to Preview";
+            tableViewCell.accessoryView = self.forceTouchSwitch;
+            [self.forceTouchSwitch addTarget:self action:@selector(didToggleForceTouchSwitch:) forControlEvents:UIControlEventValueChanged];
+            break;
+
     }
     return tableViewCell;
+}
+
+- (void)didToggleForceTouchSwitch:(UISwitch *)forceTouchSwitch {
+    self.imagePickerOptions.isForceTouchEnabled = forceTouchSwitch.on;
 }
 
 

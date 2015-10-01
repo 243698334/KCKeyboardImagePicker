@@ -96,7 +96,7 @@
 
 @end
 
-@interface KCKeyboardImagePickerController () <KCKeyboardImagePickerViewDataSource, KCKeyboardImagePickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UIViewControllerPreviewingDelegate>
+@interface KCKeyboardImagePickerController () <KCKeyboardImagePickerViewDataSource, KCKeyboardImagePickerViewDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate>
 
 @property (nonatomic, strong) NSMutableDictionary *handlers;
 @property (nonatomic, strong) NSMutableDictionary *images;
@@ -106,7 +106,7 @@
 @property (nonatomic, strong) NSMutableDictionary *titleColors;
 @property (nonatomic, strong) NSMutableDictionary *backgroundColors;
 @property (nonatomic, strong) NSMutableDictionary *optionButtonIndices;
-@property (nonatomic, weak) UIViewController *parentViewController;
+@property (nonatomic, weak) UIViewController *imagePickerParentViewController;
 
 @property (nonatomic, strong) PHFetchResult *photoLibraryFetchResult;
 @property (nonatomic, strong) UIImage *placeHolderImage;
@@ -142,8 +142,11 @@
         [self.titles setObject:action.title forKey:[NSNumber numberWithInteger:action.tag]];
         [self.forceTouchEnabledFlags setObject:[NSNumber numberWithBool:action.forceTouchEnabled] forKeyedSubscript:[NSNumber numberWithInteger:action.tag]];
         [self.optionButtonIndices setObject:[NSNumber numberWithInteger:action.tag] forKey:[NSNumber numberWithInteger:[self.optionButtonIndices count]]];
+        if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+            [self registerForPreviewingWithDelegate:self sourceView:self.imagePickerView];
+        }
     } else {
-        self.parentViewController = action.parentViewController;
+        self.imagePickerParentViewController = action.parentViewController;
     }
     [self.handlers setObject:action.handler forKey:[NSNumber numberWithInteger:action.tag]];
 }
@@ -200,6 +203,7 @@
 }
 
 - (void)setupForceTouch {
+    [self registerForPreviewingWithDelegate:self sourceView:self.imagePickerView];
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
         [self registerForPreviewingWithDelegate:self sourceView:self.imagePickerView];
     }
@@ -211,13 +215,16 @@
     KCKeyboardImagePickerPreviewViewController *previewViewController = [[KCKeyboardImagePickerPreviewViewController alloc] init];
     for (NSNumber *currentActionIndex in [self.optionButtonIndices allKeys]) {
         NSNumber *currentActionTag = [self.optionButtonIndices objectForKey:currentActionIndex];
-        UIPreviewAction *currentPreviewAction = [UIPreviewAction actionWithTitle:[self.titles objectForKey:currentActionTag] style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
-            [self imageForPreviewAtIndex:previewingImageIndex handler:^(UIImage *image) {
-                void (^ handler)(UIImage *selectedImage) = [self.handlers objectForKey:currentActionTag];
-                handler(image);
+        if ([[self.forceTouchEnabledFlags objectForKey:currentActionIndex] isEqualToNumber:[NSNumber numberWithBool:YES]]) {
+            UIPreviewAction *currentPreviewAction = [UIPreviewAction actionWithTitle:[self.titles objectForKey:currentActionTag] style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+                [self imageForPreviewAtIndex:previewingImageIndex handler:^(UIImage *image) {
+                    void (^ handler)(UIImage *selectedImage) = [self.handlers objectForKey:currentActionTag];
+                    handler(image);
+                }];
             }];
-        }];
-        [previewViewController addPreviewAction:currentPreviewAction];
+            [previewViewController addPreviewAction:currentPreviewAction];
+
+        }
     }
     
     [self imageForPreviewAtIndex:previewingImageIndex handler:^(UIImage *image) {
@@ -334,7 +341,7 @@
     
     imagePickerController.allowsEditing = YES;
     imagePickerController.delegate = self;
-    [self.parentViewController presentViewController:imagePickerController animated:YES completion:nil];
+    [self.imagePickerParentViewController presentViewController:imagePickerController animated:YES completion:nil];
 }
 
 #pragma mark - UIImagePickerControllerDelegate

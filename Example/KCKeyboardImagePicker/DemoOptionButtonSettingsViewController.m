@@ -11,6 +11,7 @@
 @interface DemoOptionButtonSettingsViewController ()
 
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UISwitch *forceTouchSwitch;
 
 @property (nonatomic) NSInteger buttonIndex;
 @property (nonatomic, strong) DemoImagePickerOptions *imagePickerOptions;
@@ -19,7 +20,8 @@
 
 NSInteger const kButtonColorsSectionIndex = 0;
 NSInteger const kButtonTitleSectionIndex = 1;
-NSInteger const kButtonDeleteSectionIndex = 2;
+NSInteger const kButton3DTouchSectionIndex = 2;
+NSInteger const kButtonDeleteSectionIndex = 3;
 
 NSInteger const kButtonColorsSectionColorIndex = 0;
 NSInteger const kButtonColorsSectionTitleColorIndex = 1;
@@ -51,22 +53,17 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
     [self.view addSubview:self.tableView];
 }
 
-- (void)deleteCurrentButton {
-    NSMutableArray *titles = [self.imagePickerOptions.optionButtonTitles mutableCopy];
-    [titles removeObjectAtIndex:self.buttonIndex];
-    self.imagePickerOptions.optionButtonTitles = [NSArray arrayWithArray:titles];
-    NSMutableArray *colors = [self.imagePickerOptions.optionButtonColors mutableCopy];
-    [colors removeObjectAtIndex:self.buttonIndex];
-    self.imagePickerOptions.optionButtonColors = [NSArray arrayWithArray:colors];
-    NSMutableArray *titleColors = [self.imagePickerOptions.optionButtonTitleColors mutableCopy];
-    [titleColors removeObjectAtIndex:self.buttonIndex];
-    self.imagePickerOptions.optionButtonTitleColors = [NSArray arrayWithArray:titleColors];
+- (void)deleteCurrentButton {    
+    [self.imagePickerOptions.optionButtonTitles removeObjectAtIndex:self.buttonIndex];
+    [self.imagePickerOptions.optionButtonColors removeObjectAtIndex:self.buttonIndex];
+    [self.imagePickerOptions.optionButtonTitleColors removeObjectAtIndex:self.buttonIndex];
+    [self.imagePickerOptions.forceTouchEnabledFlags removeObjectAtIndex:self.buttonIndex];
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -74,6 +71,8 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
         case kButtonColorsSectionIndex:
             return 2;
         case kButtonTitleSectionIndex:
+            return 1;
+        case kButton3DTouchSectionIndex:
             return 1;
         case kButtonDeleteSectionIndex:
             return 1;
@@ -88,6 +87,8 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
             return @"Colors";
         case kButtonTitleSectionIndex:
             return @"Title";
+        case kButton3DTouchSectionIndex:
+            return @"3D Touch";
         default:
             return nil;
     }
@@ -120,6 +121,14 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
             tableViewCell.textLabel.text = @"Title Text";
             tableViewCell.detailTextLabel.text = self.imagePickerOptions.optionButtonTitles[self.buttonIndex];
             tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            break;
+        case kButton3DTouchSectionIndex:
+            tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"Button3DTouchSectionCellIdentifier"];
+            self.forceTouchSwitch = [[UISwitch alloc] init];
+            self.forceTouchSwitch.on = [self.imagePickerOptions.forceTouchEnabledFlags[self.buttonIndex] boolValue];
+            tableViewCell.textLabel.text = @"Add to 3D Touch Action Sheet";
+            tableViewCell.accessoryView = self.forceTouchSwitch;
+            [self.forceTouchSwitch addTarget:self action:@selector(didToggleForceTouchSwitch:) forControlEvents:UIControlEventValueChanged];
             break;
         case kButtonDeleteSectionIndex:
             tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"ButtonDeleteSectionCellIdentifier"];
@@ -171,9 +180,7 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
         return;
     }
     if (alertView.tag == kButtonColorsSectionTitleAlertViewTag) {
-        NSMutableArray *titles = [self.imagePickerOptions.optionButtonTitles mutableCopy];
-        [titles replaceObjectAtIndex:self.buttonIndex withObject:[alertView textFieldAtIndex:0].text];
-        self.imagePickerOptions.optionButtonTitles = [NSArray arrayWithArray:titles];
+        [self.imagePickerOptions.optionButtonTitles replaceObjectAtIndex:self.buttonIndex withObject:[alertView textFieldAtIndex:0].text];
         [self.tableView reloadData];
     }
 }
@@ -181,23 +188,19 @@ NSInteger const kButtonColorsSectionTitleAlertViewTag = 0;
 #pragma mark - DemoColorSettingsViewDelegate
 
 - (void)didFinishSetColor:(UIColor *)color forTag:(NSInteger)tag {
-    NSArray *originalColors = nil;
-    NSMutableArray *modifiedColors = nil;
     switch (tag) {
         case kButtonColorsSectionColorTag:
-            originalColors = self.imagePickerOptions.optionButtonColors;
-            modifiedColors = [originalColors mutableCopy];
-            [modifiedColors replaceObjectAtIndex:self.buttonIndex withObject:color];
-            self.imagePickerOptions.optionButtonColors = [NSArray arrayWithArray:modifiedColors];
+            [self.imagePickerOptions.optionButtonColors replaceObjectAtIndex:self.buttonIndex withObject:color];
             break;
         case kButtonColorsSectionTitleColorTag:
-            originalColors = self.imagePickerOptions.optionButtonTitleColors;
-            modifiedColors = [originalColors mutableCopy];
-            [modifiedColors replaceObjectAtIndex:self.buttonIndex withObject:color];
-            self.imagePickerOptions.optionButtonTitleColors = [NSArray arrayWithArray:modifiedColors];
+            [self.imagePickerOptions.optionButtonTitleColors replaceObjectAtIndex:self.buttonIndex withObject:color];
             break;
     }
     [self.tableView reloadData];
+}
+
+- (void)didToggleForceTouchSwitch:(UISwitch *)forceTouchSwitch {
+    [self.imagePickerOptions.forceTouchEnabledFlags setObject:[NSNumber numberWithBool:forceTouchSwitch.on] atIndexedSubscript:self.buttonIndex];
 }
 
 @end

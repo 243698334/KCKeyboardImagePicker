@@ -87,7 +87,7 @@
 
 @end
 
-@interface KCKeyboardImagePickerController : UIViewController
+@interface KCKeyboardImagePickerController : UIViewController<UIViewControllerPreviewingDelegate>
 
 /**
  @abstract The keyboard image picker view instance.

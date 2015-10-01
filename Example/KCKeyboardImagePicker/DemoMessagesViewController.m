@@ -99,6 +99,7 @@
     if (self.keyboardImagePickerController == nil) {
         self.keyboardImagePickerController = [[KCKeyboardImagePickerController alloc] init];
         [self setupKeyboardImagePickerOptions];
+        [self registerForPreviewingWithDelegate:self.keyboardImagePickerController sourceView:self.keyboardImagePickerController.imagePickerView];
     }
     
     self.keyboardImagePickerController.keyboardFrame = self.keyboardController.currentKeyboardFrame;
@@ -121,7 +122,7 @@
         NSString *currentOptionButtonTitle = [self.imagePickerOptions.optionButtonTitles objectAtIndex:i];
         
         // Add an action for the option button
-        [self.keyboardImagePickerController addAction:[KCKeyboardImagePickerAction actionWithOptionButtonTag:i title:currentOptionButtonTitle forceTouchEnabled:YES handler:^(UIImage *selectedImage) {
+        [self.keyboardImagePickerController addAction:[KCKeyboardImagePickerAction actionWithOptionButtonTag:i title:currentOptionButtonTitle forceTouchEnabled:[[self.imagePickerOptions.forceTouchEnabledFlags objectAtIndex:i] boolValue] handler:^(UIImage *selectedImage) {
             if ([currentOptionButtonTitle isEqualToString:@"Send"]) {
                 JSQPhotoMediaItem *photoMediaItem = [[JSQPhotoMediaItem alloc] initWithImage:selectedImage];
                 JSQMessage *newImageMessage = [JSQMessage messageWithSenderId:self.senderId displayName:self.senderDisplayName media:photoMediaItem];
