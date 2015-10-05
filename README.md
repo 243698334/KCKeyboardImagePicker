@@ -46,7 +46,7 @@ self.keyboardImagePickerController.forceTouchPreviewEnabled = YES;
 
 - Actions
 
-Here is an example to add an action for an option button. Set the `forceTouchEnabled` parameter to `YES` will add this option to the 3D Touch action sheet. Notice that you need to first set `forceTouchPreviewEnabled` to `YES` to display the action sheet. 
+Here is an example to add an action for an option button. Passing `YES` to the `forceTouchEnabled` parameter will add this option to the 3D Touch action sheet. Notice that you need to first set `forceTouchPreviewEnabled` to `YES` to display the action sheet. 
 ````objective-c
 self.action = [KCKeyboardImagePickerAction actionWithOptionButtonTag:1 
                                                                title:@"Send" 
