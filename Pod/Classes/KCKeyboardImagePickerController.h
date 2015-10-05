@@ -45,12 +45,12 @@
  @param handler A block to execute when the user selects an image from the full
  screen UIImagePickerController.
  */
-+ (instancetype)actionWithImagePickerControllerButtonParentViewController:(UIViewController *)viewController handler:(void (^) (UIImage *selectedImage))handler;
++ (instancetype)actionWithImagePickerControllerButtonHandler:(void (^) (UIImage *selectedImage))handler;
 
 /**
  @abstract Create and return an action for an option button.
  @param tag An integer as the identifer of the option button. It will be used to
- match the style of the option button.
+ match the style of the option button. The value `NSIntegerMin` is reserved.
  @param title A string as the title of the action, which will displayed on the
  corresponding option button.
  @param enabled A boolean indicating if 3D touch should be enabled for this action.
@@ -79,7 +79,7 @@
 /**
  @abstract Create and return a style for an option button.
  @param tag An integer as the identifer of the option button. It will be used to
- match the action of the option button.
+ match the action of the option button. The value `NSIntegerMin` is reserved.
  @param titleColor The color of the title displayed on this button.
  @param backgroundColor The background color of the button.
  */
@@ -87,7 +87,7 @@
 
 @end
 
-@interface KCKeyboardImagePickerController : UIViewController<UIViewControllerPreviewingDelegate>
+@interface KCKeyboardImagePickerController : NSObject<UIViewControllerPreviewingDelegate>
 
 /**
  @abstract The keyboard image picker view instance.
@@ -99,6 +99,23 @@
  @discussion It should always be the same as the keyboard's frame.
  */
 @property (nonatomic, assign) CGRect keyboardFrame;
+
+/**
+ @abstract Change this flag to enable Force Touch preview on images.
+ @discussion You have to enable Force Touch Preview in order to add options to
+ the peek and pop action sheet.
+ */
+@property (nonatomic, assign, getter=isForceTouchPreviewEnabled) BOOL forceTouchPreviewEnabled;
+
+/**
+ @abstract The method to init the picker controller.
+ @discussion The picker controller will keep a weak reference to the parent view
+ controller who owns it. This reference is used for force touch features and image 
+ picker controller features.
+ @param parentViewController A reference to the view controller who owns the picker.
+ In most cases, pass in `self`.
+ */
+- (id)initWithParentViewController:(UIViewController *)parentViewController;
 
 /**
  @abstract Attaches an action to the keyboard image picker view.

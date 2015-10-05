@@ -35,7 +35,6 @@
     
     self.demoMessages = [[NSMutableArray alloc] initWithObjects:
                          [[JSQMessage alloc] initWithSenderId:@"KC" senderDisplayName:@"Kev1nChen" date:[NSDate date] text:@"Tap on the accessory icon to toggle the picker."],
-                         [[JSQMessage alloc] initWithSenderId:@"KC" senderDisplayName:@"Kev1nChen" date:[NSDate date] text:@"When running for the first time, grant the access and re-enter this chat window."],
                          nil];
     
     self.isKeyboardImagePickerViewActive = NO;
@@ -97,11 +96,8 @@
     self.isKeyboardImagePickerViewActive = YES;
     
     if (self.keyboardImagePickerController == nil) {
-        self.keyboardImagePickerController = [[KCKeyboardImagePickerController alloc] init];
+        self.keyboardImagePickerController = [[KCKeyboardImagePickerController alloc] initWithParentViewController:self];
         [self setupKeyboardImagePickerOptions];
-        if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
-            [self registerForPreviewingWithDelegate:self.keyboardImagePickerController sourceView:self.keyboardImagePickerController.imagePickerView];
-        }
     }
     
     self.keyboardImagePickerController.keyboardFrame = self.keyboardController.currentKeyboardFrame;
@@ -119,6 +115,8 @@
 }
 
 - (void)setupKeyboardImagePickerOptions {
+    self.keyboardImagePickerController.forceTouchPreviewEnabled = self.imagePickerOptions.isForceTouchEnabled;
+    
     // option buttons
     for (NSUInteger i = 0; i < [self.imagePickerOptions.optionButtonTitles count]; i++) {
         NSString *currentOptionButtonTitle = [self.imagePickerOptions.optionButtonTitles objectAtIndex:i];
@@ -140,7 +138,7 @@
     // image picker controller button
     if (self.imagePickerOptions.isImagePickerControllerButtonVisible) {
         // Add an action for the image picker controller button
-        [self.keyboardImagePickerController addAction:[KCKeyboardImagePickerAction actionWithImagePickerControllerButtonParentViewController:self handler:^(UIImage *selectedImage) {
+        [self.keyboardImagePickerController addAction:[KCKeyboardImagePickerAction actionWithImagePickerControllerButtonHandler:^(UIImage *selectedImage) {
             JSQPhotoMediaItem *photoMediaItem = [[JSQPhotoMediaItem alloc] initWithImage:selectedImage];
             JSQMessage *newImageMessage = [JSQMessage messageWithSenderId:self.senderId displayName:self.senderDisplayName media:photoMediaItem];
             [self.demoMessages addObject:newImageMessage];

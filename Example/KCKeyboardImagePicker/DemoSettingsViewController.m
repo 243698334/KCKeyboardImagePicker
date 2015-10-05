@@ -179,7 +179,6 @@ NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAl
             }
             self.forceTouchSwitch = [[UISwitch alloc] init];
             self.forceTouchSwitch.on = self.imagePickerOptions.isForceTouchEnabled;
-            self.forceTouchSwitch.enabled = NO;
             tableViewCell.textLabel.text = @"3D Touch to Preview";
             tableViewCell.accessoryView = self.forceTouchSwitch;
             [self.forceTouchSwitch addTarget:self action:@selector(didToggleForceTouchSwitch:) forControlEvents:UIControlEventValueChanged];
