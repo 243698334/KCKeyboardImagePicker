@@ -72,7 +72,7 @@
 
 @implementation KCKeyboardImagePickerStyle
 
-+ (instancetype)styleWithImagePickerControllerBackgroundColor:(UIColor *)color image:(UIImage *)image {
++ (instancetype)styleWithImagePickerControllerButtonBackgroundColor:(UIColor *)color image:(UIImage *)image {
     KCKeyboardImagePickerStyle *style = [[KCKeyboardImagePickerStyle alloc] init];
     style.tag = NSIntegerMin;
     style.image = image;

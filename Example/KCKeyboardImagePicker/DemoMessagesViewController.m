@@ -146,7 +146,7 @@
         }]];
         
         // Add a style for the image picker controller button
-        [self.keyboardImagePickerController addStyle:[KCKeyboardImagePickerStyle styleWithImagePickerControllerBackgroundColor:self.imagePickerOptions.imagePickerControllerButtonColor image:[UIImage imageNamed:@"ImagePickerControllerButtonIcon"]]];
+        [self.keyboardImagePickerController addStyle:[KCKeyboardImagePickerStyle styleWithImagePickerControllerButtonBackgroundColor:self.imagePickerOptions.imagePickerControllerButtonColor image:[UIImage imageNamed:@"ImagePickerControllerButtonIcon"]]];
     }
 }
 

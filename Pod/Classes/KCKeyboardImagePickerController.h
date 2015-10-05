@@ -74,7 +74,7 @@
  @param backgroundColor The background color of the button.
  @param image The image displayed on this button.
  */
-+ (instancetype)styleWithImagePickerControllerBackgroundColor:(UIColor *)color image:(UIImage *)image;
++ (instancetype)styleWithImagePickerControllerButtonBackgroundColor:(UIColor *)color image:(UIImage *)image;
 
 /**
  @abstract Create and return a style for an option button.
