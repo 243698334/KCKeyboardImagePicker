@@ -28,7 +28,7 @@ To run the example project, clone the repo, and run `pod install` from the `Exam
 #import <KCKeyboardImagePicker/KCKeyboardImagePickerController.h>
 ````
 
-- Display
+- **Display**
 
 Init the image picker controller by passing a reference to the view controller who owns the picker. Set a frame (usually the frame of the keyboard) to the `KCKeyboardImagePickerController`, and add the `imagePickerView` to a container. 
 ````objective-c
@@ -36,15 +36,23 @@ self.keyboardImagePickerController = [[KCKeyboardImagePickerController alloc] in
 self.keyboardImagePickerController.keyboardFrame = self.keyboardController.currentKeyboardFrame;
 [self.someContainerView addSubview:self.keyboardImagePickerController.imagePickerView];
 ````
+To show the picker, 
+````objective-c
+[self.keyboardImagePickerController showKeyboardImagePickerViewAnimated:YES];
+````
+To dismiss the picker, 
+````objective-c
+[self.keyboardImagePickerController hideKeyboardImagePickerViewAnimated:YES];
+````
 
-- 3D Touch
+- **3D Touch**
 
 KCKeyboardImagePicker supports 3D Touch's peek and pop action. Force Touching on an image will bring up a full-sized preview (instead of the cropped square one) of the image. The action sheet underneath the preview will contain selected options the same as the option buttons (see "Actions" section below). 
 ````objective-c
 self.keyboardImagePickerController.forceTouchPreviewEnabled = YES;
 ````
 
-- Actions
+- **Actions**
 
 Here is an example to add an action for an option button. Passing `YES` to the `forceTouchEnabled` parameter will add this option to the 3D Touch action sheet. Notice that you need to first set `forceTouchPreviewEnabled` to `YES` to display the action sheet. 
 ````objective-c
@@ -65,7 +73,7 @@ self.action = [KCKeyboardImagePickerAction actionactionWithImagePickerController
 ````
 You can add up to four actions (namely four option buttons). Each action will be matched with an optional style (see the section below) by the `tag` number. 
 
-- Styles
+- **Styles**
 
 To add a style for an option button, 
 ````objective-c
@@ -102,11 +110,11 @@ self.keyboardController = [[JSQMessagesKeyboardController alloc] initWithTextVie
 Next, implement the method in `JSQMessagesKeyboardControllerDelegate`. The first if branch is to avoid the reposition of the `inputToolbar` when the `textView` inside of it resigns from first responder in order to hide the keyboard and display the keyboard  image picker.
 ````objective-c
 - (void)keyboardController:(JSQMessagesKeyboardController *)keyboardController keyboardDidChangeFrame:(CGRect)keyboardFrame {
-if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == 0.0f) {
-  return;
-}
-  // code for inputToolbar reposition... 
-  // check the demo for details
+    if (![self.inputToolbar.contentView.textView isFirstResponder] && self.toolbarBottomLayoutGuide.constant == 0.0f) {
+        return;
+    }
+    // code for inputToolbar reposition... 
+    // check the demo for details
 }
 ````
 Initializing the picker by using the `KCKeyboardImagePickerController`. You need to set the frame of the picker by assigning the current keyboard frame to `keyboardFrame` attribute. Don't forget to add the picker view to the `contextView` of the `keyboardController`. 
@@ -119,12 +127,12 @@ self.keyboardImagePickerController.keyboardFrame = self.keyboardController.curre
 Before showing the picker, you can end the editing mode of the `contextView` to hide the keyboard. 
 ````objective-c
 [self.keyboardController.contextView endEditing:YES];
-[self.keyboardImagePickerController showKeyboardImagePickerViewAnimated:animated];
+[self.keyboardImagePickerController showKeyboardImagePickerViewAnimated:YES];
 ````
 
 To dismiss the picker, 
 ````objective-c
-[self.keyboardImagePickerController hideKeyboardImagePickerViewAnimated:animated];
+[self.keyboardImagePickerController hideKeyboardImagePickerViewAnimated:YES];
 ````
 
 #### Without the default controller
