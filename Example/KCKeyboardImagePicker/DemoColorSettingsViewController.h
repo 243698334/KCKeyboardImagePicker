@@ -17,7 +17,7 @@
 
 @interface DemoColorSettingsViewController : UIViewController<UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate>
 
-@property (nonatomic, assign) id<DemoColorSettingsViewDelegate> delegate;
+@property (nonatomic, weak) id<DemoColorSettingsViewDelegate> delegate;
 
 - (id)initWithColor:(UIColor *)color tag:(NSInteger)tag;
 

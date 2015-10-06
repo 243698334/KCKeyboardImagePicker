@@ -165,6 +165,7 @@ NSInteger const kImagePickerControllerButtonSectionImagePickerControllerButtonAl
                 tableViewCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:kOptionButtonsSectionCellIdentifier];
                 tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             }
+            tableViewCell.detailTextLabel.text = nil;
             if (indexPath.row < [self.imagePickerOptions.optionButtonTitles count]) {
                 tableViewCell.textLabel.text = [NSString stringWithFormat:@"Button %ld", indexPath.row + 1];
                 tableViewCell.detailTextLabel.text = self.imagePickerOptions.optionButtonTitles[indexPath.row];

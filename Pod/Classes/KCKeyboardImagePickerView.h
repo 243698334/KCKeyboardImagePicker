@@ -236,12 +236,12 @@
 /**
  @abstract The object that acts as the delegate of the picker.
  */
-@property (nonatomic, assign) id<KCKeyboardImagePickerViewDelegate> delegate;
+@property (nonatomic, weak) id<KCKeyboardImagePickerViewDelegate> delegate;
 
 /**
  @abstract The object that acts as the data source of the picker.
  */
-@property (nonatomic, assign) id<KCKeyboardImagePickerViewDataSource> dataSource;
+@property (nonatomic, weak) id<KCKeyboardImagePickerViewDataSource> dataSource;
 
 /**
  @abstract Updates the image at an index of the collection view with or without animation.
