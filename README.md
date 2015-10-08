@@ -8,7 +8,7 @@ Now support 3D Touch!
 
 ## Screenshots
 
-![Demo](https://camo.githubusercontent.com/898bbe374accce9f4c51f1c628ff0b3150f6ba17/687474703a2f2f692e696d6775722e636f6d2f516a41415542392e676966)
+![demo](https://cloud.githubusercontent.com/assets/5849363/10363084/ef5d7dd2-6d77-11e5-918a-7fc87ea01087.gif)
 ![Screenshot2](https://raw.githubusercontent.com/Kev1nChen/KCKeyboardImagePicker/master/Screenshots/screenshot2.jpg)
 ![Screenshot3](https://raw.githubusercontent.com/Kev1nChen/KCKeyboardImagePicker/master/Screenshots/screenshot3.jpg)
 
