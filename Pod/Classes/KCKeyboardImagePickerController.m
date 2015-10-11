@@ -136,6 +136,8 @@
         self.titleColors = [[NSMutableDictionary alloc] init];
         self.backgroundColors = [[NSMutableDictionary alloc] init];
         self.optionButtonIndices = [[NSMutableDictionary alloc] init];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(statusBarFrameWillChange:) name:UIApplicationWillChangeStatusBarFrameNotification object:nil];
     }
     return self;
 }
@@ -184,9 +186,11 @@
     
     if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
         self.photoLibraryFetchResult = [PHAsset fetchAssetsWithOptions:self.photoLibraryFetchOptions];
+        CGFloat statusBarHeight = [UIApplication sharedApplication].statusBarFrame.size.height;
         CGRect imagePickerViewInitialFrame = CGRectMake(self.imagePickerView.frame.origin.x, self.imagePickerView.frame.origin.y + self.imagePickerView.frame.size.height, self.imagePickerView.frame.size.width, 0);
         self.imagePickerView.hidden = NO;
         self.imagePickerView.frame = imagePickerViewInitialFrame;
+        self.keyboardFrame = CGRectMake(self.keyboardFrame.origin.x, self.keyboardFrame.origin.y - (statusBarHeight - 20.0), self.keyboardFrame.size.width, self.keyboardFrame.size.height);
         if (animated) {
             [UIView animateWithDuration:0.25 animations:^{
                 self.imagePickerView.frame = self.keyboardFrame;
@@ -242,6 +246,16 @@
         if ([[info objectForKey:PHImageResultIsDegradedKey] isEqual:[NSNumber numberWithInt:0]]) {
             handler(result);
         }
+    }];
+}
+
+- (void)statusBarFrameWillChange:(NSNotification *)notification {
+    CGFloat statusBarNewHeight = [UIApplication sharedApplication].statusBarFrame.size.height; //[[notification.userInfo objectForKey:UIApplicationStatusBarFrameUserInfoKey] CGRectValue].size.height;
+    CGFloat statusBarCurrentHeight = statusBarNewHeight == 20.0 ? 40.0 : 20.0;
+    CGRect imagePickerViewNewFrame = self.imagePickerView.frame;
+    imagePickerViewNewFrame.origin.y = imagePickerViewNewFrame.origin.y - (statusBarNewHeight - statusBarCurrentHeight);
+    [UIView animateWithDuration:0.35 animations:^{
+        self.imagePickerView.frame = imagePickerViewNewFrame;
     }];
 }
 
