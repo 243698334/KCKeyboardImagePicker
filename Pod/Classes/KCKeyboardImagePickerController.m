@@ -250,7 +250,7 @@
 }
 
 - (void)statusBarFrameWillChange:(NSNotification *)notification {
-    CGFloat statusBarNewHeight = [UIApplication sharedApplication].statusBarFrame.size.height; //[[notification.userInfo objectForKey:UIApplicationStatusBarFrameUserInfoKey] CGRectValue].size.height;
+    CGFloat statusBarNewHeight = [[notification.userInfo objectForKey:UIApplicationStatusBarFrameUserInfoKey] CGRectValue].size.height;
     CGFloat statusBarCurrentHeight = statusBarNewHeight == 20.0 ? 40.0 : 20.0;
     CGRect imagePickerViewNewFrame = self.imagePickerView.frame;
     imagePickerViewNewFrame.origin.y = imagePickerViewNewFrame.origin.y - (statusBarNewHeight - statusBarCurrentHeight);
