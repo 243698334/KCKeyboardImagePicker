@@ -110,19 +110,17 @@
 @required
 /**
  @abstract Asks the data source for the number of images to be shown in the keyboard
-  image picker view.
- @discussion This number can be changed after initialization of the picker, as more
- images are loaded.
+ image picker view.
  @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting this information.
- @return The number of images in the keyboard  image picker view.
+ @return The number of images in the keyboard image picker view.
  */
 - (NSInteger)numberOfImagesInKeyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView;
 
 @required
 /**
  @abstract Asks the data source for an image to display in a particular location in
- the keyboard  image picker view.
+ the keyboard image picker view.
  @discussion Since this method is called along with the data source methods for the 
  image collection view, it is suggested to return a placeholder or an immediately 
  available thumbnail instead of the actual full-sized image in order to avoid UI lag.
@@ -131,7 +129,7 @@
  @param keyboardImagePickerView A KeyboardImagePickerView object
  requesting an image which should be immediately available.
  @param index An index locating the image.
- @return A image object to be displayed in the keyboard  image picker view.
+ @return A image object to be displayed in the keyboard image picker view.
  */
 - (UIImage *)keyboardImagePickerView:(KCKeyboardImagePickerView *)keyboardImagePickerView imageAtIndex:(NSInteger)index;
 

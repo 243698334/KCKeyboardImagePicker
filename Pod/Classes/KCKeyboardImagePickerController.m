@@ -35,9 +35,9 @@
 @interface KCKeyboardImagePickerAction ()
 
 @property (nonatomic, assign) NSInteger tag;
-@property (nonatomic, assign) NSString *title;
+@property (nonatomic, strong) NSString *title;
 @property (nonatomic, assign) BOOL forceTouchEnabled;
-@property (nonatomic, assign) void (^ handler)(UIImage *selectedImage);
+@property (nonatomic, strong) void (^ handler)(UIImage *selectedImage);
 
 @end
 
@@ -64,9 +64,9 @@
 @interface KCKeyboardImagePickerStyle ()
 
 @property (nonatomic, assign) NSInteger tag;
-@property (nonatomic, assign) UIImage *image;
-@property (nonatomic, assign) UIColor *titleColor;
-@property (nonatomic, assign) UIColor *backgroundColor;
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, strong) UIColor *titleColor;
+@property (nonatomic, strong) UIColor *backgroundColor;
 
 @end
 
@@ -117,6 +117,10 @@
 - (id)initWithParentViewController:(UIViewController *)parentViewController {
     if (self = [super init]) {
         self.parentViewController = parentViewController;
+        
+        _keyboardFrame = CGRectMake([[UIScreen mainScreen] applicationFrame].origin.x, CGRectGetMaxY([[UIScreen mainScreen] applicationFrame]) - 258.0, [[UIScreen mainScreen] applicationFrame].size.width, [[UIScreen mainScreen] applicationFrame].size.height);
+        _keyboardFrameReady = NO;
+        
         self.previewingDelegateRegistered = NO;
         
         self.photoLibraryFetchOptions = [[PHFetchOptions alloc] init];
@@ -149,6 +153,11 @@
             [self.parentViewController registerForPreviewingWithDelegate:self sourceView:self.imagePickerView];
         }
     }
+}
+
+- (void)setKeyboardFrame:(CGRect)keyboardFrame {
+    _keyboardFrame = keyboardFrame;
+    _keyboardFrameReady = YES;
 }
 
 - (void)addAction:(KCKeyboardImagePickerAction *)action {

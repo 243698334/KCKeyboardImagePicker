@@ -101,6 +101,11 @@
 @property (nonatomic, assign) CGRect keyboardFrame;
 
 /**
+ @abstract Indicating if the keyboardFrame has been set.
+ */
+@property (nonatomic, assign, readonly, getter=isKeyboardFrameReady) BOOL keyboardFrameReady;
+
+/**
  @abstract Change this flag to enable Force Touch preview on images.
  @discussion You have to enable Force Touch Preview in order to add options to
  the peek and pop action sheet.
