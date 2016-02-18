@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E1A08921BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A08911BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.m */; settings = {ASSET_TAGS = (); }; };
+		0E1A08921BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E1A08911BB7746A0011A943 /* DemoImagePickerControllerButtonSettingsViewController.m */; };
 		0E8E46B91B9C3A4C00DCDF68 /* DemoOptionButtonSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E46B81B9C3A4C00DCDF68 /* DemoOptionButtonSettingsViewController.m */; };
 		0E8E46BB1B9D11CB00DCDF68 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0E8E46BA1B9D11CB00DCDF68 /* LaunchScreen.xib */; };
 		0E8E46BE1B9D15C400DCDF68 /* DemoColorSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E46BD1B9D15C400DCDF68 /* DemoColorSettingsViewController.m */; };
 		0E8E46C51B9D4BBA00DCDF68 /* DemoMessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E8E46C01B9D4BBA00DCDF68 /* DemoMessagesViewController.m */; };
 		0E9A73471BA765DF0001ED2E /* DemoImagePickerOptions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0E9A73461BA765DF0001ED2E /* DemoImagePickerOptions.m */; };
-		271B312E58EC8D6C3B78939B /* Pods_KCKeyboardImagePicker_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0DE05754720268B611E3361 /* Pods_KCKeyboardImagePicker_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		271B312E58EC8D6C3B78939B /* Pods_KCKeyboardImagePicker_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0DE05754720268B611E3361 /* Pods_KCKeyboardImagePicker_Example.framework */; };
 		6003F58E195388D20070C39A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58D195388D20070C39A /* Foundation.framework */; };
 		6003F590195388D20070C39A /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F58F195388D20070C39A /* CoreGraphics.framework */; };
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
@@ -27,7 +27,7 @@
 		6003F5B2195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F5BA195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5B8195388D20070C39A /* InfoPlist.strings */; };
 		6003F5BC195388D20070C39A /* Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F5BB195388D20070C39A /* Tests.m */; };
-		9AC24AC9EB43EDD3CCAEA43C /* Pods_KCKeyboardImagePicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C5F0F9C50B5CB3D99A50AA /* Pods_KCKeyboardImagePicker_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		9AC24AC9EB43EDD3CCAEA43C /* Pods_KCKeyboardImagePicker_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 28C5F0F9C50B5CB3D99A50AA /* Pods_KCKeyboardImagePicker_Tests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
