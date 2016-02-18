@@ -78,6 +78,11 @@ CGFloat const kKCKeyboardImagePickerViewCellOptionButtonBorderWidth = 2.0;
     return self;
 }
 
+- (void)reloadSubviews {
+    self.imagesCollectionView.frame = self.bounds;
+    [self.imagesCollectionView reloadData];
+}
+
 - (void)drawRect:(CGRect)rect {
     [super drawRect:rect];
     

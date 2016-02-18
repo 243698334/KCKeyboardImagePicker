@@ -259,4 +259,9 @@
  */
 - (NSInteger)imageIndexAtPoint:(CGPoint)point;
 
+/**
+ @abstract adjust cells frame after image picker frame changes
+ */
+- (void)reloadSubviews;
+
 @end
