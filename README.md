@@ -66,7 +66,7 @@ self.action = [KCKeyboardImagePickerAction actionWithOptionButtonTag:1
 ````
 To add an action for the image picker controller button (the one on the bottom left corner to trigger the `UIImagePickerController`)
 ````objective-c
-self.action = [KCKeyboardImagePickerAction actionactionWithImagePickerControllerButtonHandler:^(UIImage *selectedImage) {
+self.action = [KCKeyboardImagePickerAction actionWithImagePickerControllerButtonHandler:^(UIImage *selectedImage) {
     // do something with the `selectedImage`
 }];
 [self.keyboardImagePickerController addAction:self.action];
